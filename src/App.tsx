@@ -1,34 +1,60 @@
 import {
+  AlertTriangle,
   Anchor,
   ArrowRight,
-  AlertTriangle,
   BaggageClaim,
   Bus,
-  Car,
-  CheckCircle2,
   Clock,
-  Gauge,
+  DatabaseZap,
   GitBranch,
-  Hotel,
-  Info,
-  Luggage,
   MapPinned,
   MonitorPlay,
   Network,
   Plane,
-  RadioTower,
   Radar,
   Route,
   Ship,
   ShieldCheck,
-  Signpost,
-  TimerReset,
+  TrainFront,
   UsersRound,
   Waypoints,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import {
+  apiPillars,
+  apiProofGroups,
+  apiStories,
+  heroStats,
+  spinetixTransportCases,
+  supportingReferenceAssets,
+  type ApiStory,
+  type IconKey,
+  type ReferenceAsset,
+  type ReferenceCase,
+} from "./content";
 
 type AppRoute = "reference" | "demo";
+
+const icons: Record<IconKey, typeof Anchor> = {
+  alert: AlertTriangle,
+  api: DatabaseZap,
+  baggage: BaggageClaim,
+  bus: Bus,
+  clock: Clock,
+  database: DatabaseZap,
+  git: GitBranch,
+  map: MapPinned,
+  monitor: MonitorPlay,
+  network: Network,
+  plane: Plane,
+  radar: Radar,
+  route: Route,
+  ship: Ship,
+  shield: ShieldCheck,
+  train: TrainFront,
+  users: UsersRound,
+  waypoints: Waypoints,
+};
 
 function getRoute(): AppRoute {
   const hash = window.location.hash.replace("#/", "");
@@ -71,55 +97,56 @@ export function App() {
           </a>
           <a className={route === "demo" ? "active" : ""} href="#/demo">
             <MonitorPlay size={16} />
-            Demo Screens
+            API Demo
           </a>
         </nav>
       </header>
-      <main>{route === "demo" ? <DemoPage /> : <ReferencePlaceholder />}</main>
+      <main>{route === "demo" ? <DemoPage /> : <ReferencePage />}</main>
     </div>
   );
 }
 
-function ReferencePlaceholder() {
+function ReferencePage() {
   return (
     <>
-      <section className="hero-section">
+      <section className="hero-section api-hero">
         <div className="hero-copy">
-          <p className="eyebrow">SmartSEA for PPA</p>
-          <h1>The value is what feeds the CMS.</h1>
+          <p className="eyebrow">SmartSEA Intermodal APIs for PPA</p>
+          <h1>The product is the API layer.</h1>
           <p className="lede">
-            PPA can procure screens, cabling, and CMS capability. SmartSEA should
-            be positioned as the passenger experience intelligence layer that
-            turns real-time data into clear guidance.
+            PPA can buy screens, cabling, and CMS anywhere. SmartSEA should sell
+            the intermodal API layer that connects maritime, rail, airport, vessel,
+            event, disruption, Connection risk, and Recovery action intelligence
+            into passenger-ready guidance.
           </p>
           <div className="hero-actions">
             <a className="button button-primary" href="#/demo">
-              View demo screens <ArrowRight size={18} />
+              Open API demo <ArrowRight size={18} />
             </a>
-            <a className="button button-secondary" href="#reference-architecture">
-              See the platform layer
+            <a className="button button-secondary" href="#api-proof">
+              See API proof
             </a>
           </div>
         </div>
-        <ProductVisual />
+        <ApiSystemVisual />
       </section>
 
       <section className="section-band tight-band">
         <div className="section-grid two-column">
           <div>
             <p className="eyebrow">Main message</p>
-            <h2>This is not a signage project.</h2>
+            <h2>This is not a signage modernization story.</h2>
           </div>
           <div className="statement-stack">
             <p>
-              Modern screens matter, but they do not solve the passenger problem
-              by themselves. Passengers usually do not lack signs. They lack
-              clarity on what to do next when the journey changes.
+              The real sales object is SmartSEA Intermodal APIs: a journey data
+              product that turns disconnected movements into a single operational
+              picture.
             </p>
             <p>
-              The opportunity is the data and logic layer behind the experience:
-              intermodal APIs, live operational state, disruptions, passenger
-              flow, baggage, and onward mobility.
+              CMS and screens are channels. The differentiated value is knowing
+              what changed, which passengers are affected, what connection is at
+              risk, and what instruction should be issued next.
             </p>
           </div>
         </div>
@@ -127,115 +154,71 @@ function ReferencePlaceholder() {
 
       <section className="section-band">
         <div className="section-heading">
-          <p className="eyebrow">End-to-end journey</p>
-          <h2>Clarity must travel with the passenger.</h2>
+          <p className="eyebrow">What PPA buys from SmartSEA</p>
+          <h2>APIs that make the whole journey legible.</h2>
           <p>
-            The experience starts before arrival and continues after boarding or
-            disembarkation. Static wayfinding cannot respond to the moments that
-            create stress.
+            The platform connects the journey from cruise arrival and terminal
+            flow through rail, road, airport, baggage, city transfer, and recovery.
           </p>
         </div>
-        <div className="journey-grid">
-          {journeyMoments.map((moment) => (
-            <article className="journey-card" key={moment.title}>
-              <moment.icon size={22} />
-              <h3>{moment.title}</h3>
-              <p>{moment.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-band dark-band" id="reference-architecture">
-        <div className="section-heading">
-          <p className="eyebrow">Platform layer</p>
-          <h2>SmartSEA turns operational data into passenger instructions.</h2>
-          <p>
-            The CMS remains the publishing channel. SmartSEA becomes the decision
-            layer that decides what message should appear, where it should appear,
-            when it expires, and what passenger action it should trigger.
-          </p>
-        </div>
-        <div className="architecture-flow">
-          {architecture.map((item, index) => (
-            <article className="architecture-card" key={item.title}>
-              <span className="architecture-index">{String(index + 1).padStart(2, "0")}</span>
-              <item.icon size={24} />
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-band spinetix-reference-section">
-        <div className="section-heading">
-          <p className="eyebrow">SpinetiX transport references</p>
-          <h2>Proven screen networks make the case stronger, but not complete.</h2>
-          <p>
-            SpinetiX publicly references transportation deployments across cruise,
-            airport, rail, and passenger mobility environments. That supports the
-            publishing and control layer. SmartSEA should own the live guidance
-            logic that makes those screens useful when the journey changes.
-          </p>
-        </div>
-        <div className="reference-showcase">
-          <article className="reference-visual-card">
-            <img
-              src="/assets/references/copenhagen-malmo-port-reference.svg"
-              alt="Copenhagen Malmo Port passenger information reference screen"
-            />
-            <div>
-              <p className="reference-label">Attached reference visual</p>
-              <h3>Copenhagen Malmö Port passenger information screen</h3>
-              <p>
-                This is the useful channel pattern: ferry state, departure urgency,
-                local transfers, map context, weather, and QR handoff presented as
-                one calm passenger instruction surface.
-              </p>
-            </div>
-          </article>
-          <div className="reference-case-grid">
-            {spinetixCases.map((item) => (
-              <article className="reference-case" key={item.title}>
-                <item.icon size={20} />
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
+        <div className="pillar-grid">
+          {apiPillars.map((pillar) => {
+            const Icon = icons[pillar.icon];
+            return (
+              <article className="journey-card api-pillar-card" key={pillar.title}>
+                <Icon size={22} />
+                <h3>{pillar.title}</h3>
+                <p>{pillar.body}</p>
               </article>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </section>
 
-      <section className="section-band">
-        <div className="section-grid two-column">
-          <div>
-            <p className="eyebrow">What SmartSEA sells</p>
-            <h2>The CMS becomes the channel. The value is live journey logic.</h2>
-          </div>
-          <div className="capability-list">
-            {capabilities.map((capability) => (
-              <article key={capability.title}>
-                <capability.icon size={20} />
-                <div>
-                  <h3>{capability.title}</h3>
-                  <p>{capability.body}</p>
+      <section className="section-band dark-band" id="api-proof">
+        <div className="section-heading">
+          <p className="eyebrow">API proof</p>
+          <h2>Swagger foundations plus GIDP demo extensions.</h2>
+          <p>
+            The standalone sales page should show the API evidence without
+            depending on localhost. These are curated snapshots from the local
+            GIDP demo and its Swagger contract.
+          </p>
+        </div>
+        <div className="api-proof-grid">
+          {apiProofGroups.map((group) => {
+            const Icon = icons[group.icon];
+            return (
+              <article className="api-proof-card" key={group.title}>
+                <div className="api-proof-topline">
+                  <Icon size={20} />
+                  <span>{group.source}</span>
                 </div>
+                <h3>{group.title}</h3>
+                <p>{group.body}</p>
+                <strong>{group.metric}</strong>
+                <ul>
+                  {group.endpoints.map((endpoint) => (
+                    <li key={endpoint}>{endpoint}</li>
+                  ))}
+                </ul>
               </article>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </section>
+
+      <ReferenceSection />
 
       <section className="closing-band">
         <img
           src="/assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
           alt="SmartSEA powered by SITA"
         />
-        <p>The tender upgrades screens and CMS.</p>
-        <h2>SmartSEA upgrades the experience.</h2>
+        <p>The tender can upgrade screens and CMS.</p>
+        <h2>SmartSEA upgrades the journey data product behind them.</h2>
         <a className="button button-on-dark" href="#/demo">
-          Open demo screens <ArrowRight size={18} />
+          Open API demo <ArrowRight size={18} />
         </a>
       </section>
     </>
@@ -243,617 +226,237 @@ function ReferencePlaceholder() {
 }
 
 function DemoPage() {
-  const [selectedScenarioId, setSelectedScenarioId] = useState("delay");
-  const selectedScenario =
-    scenarios.find((scenario) => scenario.id === selectedScenarioId) ?? scenarios[0];
+  const [selectedStoryId, setSelectedStoryId] = useState(apiStories[0].id);
+  const selectedStory =
+    apiStories.find((story) => story.id === selectedStoryId) ?? apiStories[0];
+  const StoryIcon = icons[selectedStory.icon];
 
   return (
     <>
       <section className="demo-hero">
         <div className="demo-hero-copy">
-          <p className="eyebrow">Demo screens</p>
-          <h1>One journey layer. Many passenger moments.</h1>
+          <p className="eyebrow">API-driven demo</p>
+          <h1>Signals in. Passenger instruction out.</h1>
           <p className="lede">
-            Choose an operating scenario and watch SmartSEA update the screen
-            network with the next best passenger instruction.
+            Switch between standalone API snapshot stories. Each scenario shows
+            which intermodal signals are used and what passenger guidance is
+            generated without exposing a raw API response.
           </p>
         </div>
-        <div className={`scenario-summary severity-${selectedScenario.severity}`}>
+        <div className={`scenario-summary severity-${selectedStory.severity}`}>
           <div className="summary-topline">
-            <selectedScenario.icon size={26} />
-            <span>{selectedScenario.status}</span>
+            <StoryIcon size={26} />
+            <span>{selectedStory.status}</span>
           </div>
-          <h2>{selectedScenario.headline}</h2>
-          <p>{selectedScenario.operatorNote}</p>
+          <h2>{selectedStory.headline}</h2>
+          <p>{selectedStory.operatorNote}</p>
         </div>
       </section>
 
-      <section className="demo-workbench">
-        <div className="scenario-rail" aria-label="Operating scenarios">
-          {scenarios.map((scenario) => (
-            <button
-              className={scenario.id === selectedScenario.id ? "active" : ""}
-              key={scenario.id}
-              onClick={() => setSelectedScenarioId(scenario.id)}
-              type="button"
-            >
-              <scenario.icon size={18} />
-              <span>{scenario.label}</span>
-            </button>
-          ))}
+      <section className="demo-workbench api-workbench">
+        <div className="scenario-rail" aria-label="API scenarios">
+          {apiStories.map((story) => {
+            const Icon = icons[story.icon];
+            return (
+              <button
+                className={story.id === selectedStory.id ? "active" : ""}
+                key={story.id}
+                onClick={() => setSelectedStoryId(story.id)}
+                type="button"
+              >
+                <Icon size={18} />
+                <span>{story.label}</span>
+              </button>
+            );
+          })}
         </div>
 
-        <div className="screens-grid">
-          {touchpoints.map((touchpoint) => (
-            <PassengerScreen
-              key={touchpoint.id}
-              message={selectedScenario.messages[touchpoint.id]}
-              scenario={selectedScenario}
-              touchpoint={touchpoint}
-            />
-          ))}
+        <div className="api-demo-grid">
+          <ApiInstructionPanel story={selectedStory} />
+          <ApiSignalsPanel story={selectedStory} />
+          <JourneyTimeline story={selectedStory} />
         </div>
       </section>
     </>
   );
 }
 
-function PassengerScreen({
-  message,
-  scenario,
-  touchpoint,
-}: {
-  message: TouchpointMessage;
-  scenario: Scenario;
-  touchpoint: Touchpoint;
-}) {
+function ApiInstructionPanel({ story }: { story: ApiStory }) {
   return (
-    <article className={`passenger-screen severity-${scenario.severity}`}>
-      <div className="screen-topbar">
-        <img
-          src="/assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
-          alt="SmartSEA powered by SITA"
-        />
-        <span>{touchpoint.zone}</span>
+    <article className={`instruction-panel severity-${story.severity}`}>
+      <div className="summary-topline">
+        <MonitorPlay size={22} />
+        <span>Passenger instruction generated</span>
       </div>
-      <div className="screen-body">
-        <div className="screen-kicker">
-          <touchpoint.icon size={17} />
-          {touchpoint.label}
-        </div>
-        <h3>{message.title}</h3>
-        <p>{message.instruction}</p>
-        <div className="next-action">
-          <span>Next action</span>
-          <strong>{message.action}</strong>
-        </div>
+      <h2>{story.instruction.title}</h2>
+      <p>{story.instruction.body}</p>
+      <div className="next-action api-next-action">
+        <span>Recovery action</span>
+        <strong>{story.instruction.action}</strong>
       </div>
-      <div className="screen-footer">
-        <span>{scenario.status}</span>
-        <span>{message.time}</span>
+      <div className="snapshot-grid" aria-label="Curated API snapshot metrics">
+        <Metric label="Itinerary" value={story.snapshot.itinerary} />
+        <Metric label="Risk" value={story.snapshot.risk} />
+        <Metric label="Recovery" value={story.snapshot.recovery} />
+        <Metric label="Confidence" value={story.snapshot.confidence} />
       </div>
     </article>
   );
 }
 
-const journeyMoments = [
-  {
-    title: "Home or hotel",
-    body: "Set the right departure time before passengers commit to the trip.",
-    icon: Hotel,
-  },
-  {
-    title: "Port approach",
-    body: "Adapt routing when road, taxi, shuttle, or gate conditions change.",
-    icon: Bus,
-  },
-  {
-    title: "Terminal entry",
-    body: "Direct each passenger group to the next best action, not just a zone.",
-    icon: Signpost,
-  },
-  {
-    title: "Boarding",
-    body: "React to gate changes, berth status, security flow, and vessel timing.",
-    icon: Ship,
-  },
-  {
-    title: "Baggage",
-    body: "Explain drop, reclaim, exceptions, and handoff status in real time.",
-    icon: BaggageClaim,
-  },
-  {
-    title: "City or airport",
-    body: "Connect onward mobility so the port experience extends beyond the exit.",
-    icon: Route,
-  },
-];
-
-const architecture = [
-  {
-    title: "Ingest",
-    body: "Connect terminal, vessel, intermodal, disruption, baggage, and passenger-flow signals.",
-    icon: RadioTower,
-  },
-  {
-    title: "Decide",
-    body: "Apply journey logic to determine the most useful next instruction for each context.",
-    icon: GitBranch,
-  },
-  {
-    title: "Publish",
-    body: "Feed CMS, screens, mobile, and staff channels with consistent guidance instructions.",
-    icon: MonitorPlay,
-  },
-];
-
-const spinetixCases = [
-  {
-    title: "Carnival Cruise Line",
-    body: "Cruise signage reference from desk registration to wayfinding and advertising, with SpinetiX noting more than 300 screens equipped since 2015.",
-    icon: Ship,
-  },
-  {
-    title: "Abu Dhabi International Airport",
-    body: "Airport reference spanning gate information, flight schedules, and Etihad lounge passenger communications.",
-    icon: Plane,
-  },
-  {
-    title: "Grand Central Terminal",
-    body: "Historic rail terminal information modernization while preserving the atmosphere of the landmark environment.",
-    icon: Route,
-  },
-  {
-    title: "KLIA TV Malaysia",
-    body: "Airport webTV screens combining news video, flight schedules, destination weather, and targeted advertising.",
-    icon: MonitorPlay,
-  },
-  {
-    title: "Bagdad Airport",
-    body: "Large video wall reference for destination weather, destination time, and tourism content.",
-    icon: Radar,
-  },
-];
-
-const capabilities = [
-  {
-    title: "Real-time journey information",
-    body: "Live instructions for delays, boarding changes, transfer risk, and terminal conditions.",
-    icon: Gauge,
-  },
-  {
-    title: "Intermodal coordination",
-    body: "Arrival, departure, city, airport, shuttle, taxi, metro, and coach context in one layer.",
-    icon: Waypoints,
-  },
-  {
-    title: "Disruption handling",
-    body: "Context-aware messaging that tells passengers how to adapt when the plan changes.",
-    icon: Info,
-  },
-  {
-    title: "Operational confidence",
-    body: "A controlled logic layer that reduces passenger stress and improves flow resilience.",
-    icon: ShieldCheck,
-  },
-];
-
-type Severity = "normal" | "notice" | "warning";
-type TouchpointId =
-  | "home"
-  | "approach"
-  | "terminal"
-  | "boarding"
-  | "baggage"
-  | "onward";
-
-type Touchpoint = {
-  id: TouchpointId;
-  label: string;
-  zone: string;
-  icon: typeof Hotel;
-};
-
-type TouchpointMessage = {
-  title: string;
-  instruction: string;
-  action: string;
-  time: string;
-};
-
-type Scenario = {
-  id: string;
-  label: string;
-  status: string;
-  severity: Severity;
-  headline: string;
-  operatorNote: string;
-  icon: typeof AlertTriangle;
-  messages: Record<TouchpointId, TouchpointMessage>;
-};
-
-const touchpoints: Touchpoint[] = [
-  { id: "home", label: "Home / Hotel", zone: "Pre-arrival", icon: Hotel },
-  { id: "approach", label: "Port Approach", zone: "Road and transit", icon: Bus },
-  { id: "terminal", label: "Terminal Hall", zone: "Inside terminal", icon: MapPinned },
-  { id: "boarding", label: "Boarding", zone: "Gate and berth", icon: Ship },
-  { id: "baggage", label: "Baggage", zone: "Drop and reclaim", icon: Luggage },
-  { id: "onward", label: "City / Airport", zone: "Onward mobility", icon: Plane },
-];
-
-const scenarios: Scenario[] = [
-  {
-    id: "normal",
-    label: "Normal flow",
-    status: "On schedule",
-    severity: "normal",
-    headline: "Passengers receive calm, sequenced instructions.",
-    operatorNote:
-      "SmartSEA keeps each touchpoint aligned with the journey stage instead of repeating generic directions.",
-    icon: CheckCircle2,
-    messages: {
-      home: {
-        title: "Depart for Gate E8 at 10:10",
-        instruction: "Traffic is light. Keep your documents ready before terminal entry.",
-        action: "Leave on planned schedule",
-        time: "Updated 09:42",
-      },
-      approach: {
-        title: "Use the central passenger drop-off",
-        instruction: "Coach and taxi queues are normal. Follow lane signs for Terminal A.",
-        action: "Continue to Terminal A",
-        time: "Updated 09:44",
-      },
-      terminal: {
-        title: "Proceed to document check",
-        instruction: "Expected wait is under 8 minutes. Families may use the left lane.",
-        action: "Join document check lane",
-        time: "Updated 09:46",
-      },
-      boarding: {
-        title: "Boarding opens at 10:35",
-        instruction: "Gate E8 is confirmed. Priority boarding begins first.",
-        action: "Wait near Gate E8",
-        time: "Updated 09:47",
-      },
-      baggage: {
-        title: "Baggage drop is open",
-        instruction: "Attach tags before counter entry. Oversized items use counter 3.",
-        action: "Use counters 1-3",
-        time: "Updated 09:47",
-      },
-      onward: {
-        title: "Metro and airport bus on time",
-        instruction: "Connections are operating normally after disembarkation.",
-        action: "Choose preferred connection",
-        time: "Updated 09:48",
-      },
-    },
-  },
-  {
-    id: "delay",
-    label: "Delay",
-    status: "Delay detected",
-    severity: "notice",
-    headline: "A vessel delay becomes useful passenger guidance.",
-    operatorNote:
-      "Instead of only announcing a delay, SmartSEA changes timing, routes, and wait-area instructions.",
-    icon: Clock,
-    messages: {
-      home: {
-        title: "Depart 25 minutes later",
-        instruction: "Your vessel is delayed. Arriving before 10:35 will increase terminal waiting time.",
-        action: "Delay departure if possible",
-        time: "Updated 09:42",
-      },
-      approach: {
-        title: "Do not rush to the terminal",
-        instruction: "Drop-off congestion is building. Use the west entry if arriving by taxi.",
-        action: "Use west entry",
-        time: "Updated 09:44",
-      },
-      terminal: {
-        title: "Wait in Zone B",
-        instruction: "Gate E8 is not boarding yet. Seating is available near Zone B.",
-        action: "Move to Zone B",
-        time: "Updated 09:45",
-      },
-      boarding: {
-        title: "Boarding now expected 11:05",
-        instruction: "Gate remains E8. Listen for group sequence updates.",
-        action: "Return at 10:55",
-        time: "Updated 09:46",
-      },
-      baggage: {
-        title: "Baggage drop remains open",
-        instruction: "Counters stay open until 10:50. Keep baggage with you if waiting outside.",
-        action: "Drop bags before 10:50",
-        time: "Updated 09:47",
-      },
-      onward: {
-        title: "Onward arrival shifted",
-        instruction: "Airport bus connection risk is low. Taxi queue forecast is moderate.",
-        action: "Review connection at arrival",
-        time: "Updated 09:48",
-      },
-    },
-  },
-  {
-    id: "congestion",
-    label: "Congestion",
-    status: "Flow pressure",
-    severity: "warning",
-    headline: "Crowding turns into targeted movement instructions.",
-    operatorNote:
-      "The system reduces stress by moving passengers away from pressure points before the terminal feels blocked.",
-    icon: UsersRound,
-    messages: {
-      home: {
-        title: "Arrive after 10:25 if flexible",
-        instruction: "Terminal A is busy. Later arrival reduces expected waiting time.",
-        action: "Shift arrival window",
-        time: "Updated 09:42",
-      },
-      approach: {
-        title: "Use Gate 2 for passenger entry",
-        instruction: "Gate 1 is congested. Gate 2 has lower wait and same document checks.",
-        action: "Follow signs to Gate 2",
-        time: "Updated 09:43",
-      },
-      terminal: {
-        title: "Move to security lanes 5-6",
-        instruction: "Lanes 1-3 are at capacity. Staff are opening additional lanes.",
-        action: "Use lanes 5-6",
-        time: "Updated 09:44",
-      },
-      boarding: {
-        title: "Boarding sequence unchanged",
-        instruction: "Do not queue yet. Group A will be called first on this screen.",
-        action: "Wait in open seating",
-        time: "Updated 09:45",
-      },
-      baggage: {
-        title: "Baggage counter 4 is fastest",
-        instruction: "Counters 1-2 are congested. Counter 4 accepts the same sailing.",
-        action: "Use counter 4",
-        time: "Updated 09:46",
-      },
-      onward: {
-        title: "Taxi rank temporarily busy",
-        instruction: "Metro access is clear. Airport bus departs from Bay 3.",
-        action: "Use Bay 3 or metro",
-        time: "Updated 09:47",
-      },
-    },
-  },
-  {
-    id: "boarding-change",
-    label: "Boarding change",
-    status: "Gate change",
-    severity: "warning",
-    headline: "A boarding change reaches every affected touchpoint.",
-    operatorNote:
-      "SmartSEA keeps the passenger message consistent across approach, terminal, gate, and staff channels.",
-    icon: AlertTriangle,
-    messages: {
-      home: {
-        title: "Boarding gate changed to E6",
-        instruction: "Your sailing now boards from E6. Enter through Terminal A as planned.",
-        action: "Save new gate E6",
-        time: "Updated 09:42",
-      },
-      approach: {
-        title: "Follow Terminal A, then E6",
-        instruction: "Road approach is unchanged. Digital screens inside will show the new route.",
-        action: "Continue to Terminal A",
-        time: "Updated 09:43",
-      },
-      terminal: {
-        title: "Turn right for Gate E6",
-        instruction: "Gate E8 is no longer used for this sailing. Staff are positioned at the split.",
-        action: "Follow E6 route",
-        time: "Updated 09:44",
-      },
-      boarding: {
-        title: "Board at Gate E6",
-        instruction: "Boarding sequence starts with assistance and families, then Group A.",
-        action: "Move to Gate E6",
-        time: "Updated 09:45",
-      },
-      baggage: {
-        title: "Baggage route unchanged",
-        instruction: "Drop counters remain the same. After drop, follow signs to E6.",
-        action: "Drop bags, then E6",
-        time: "Updated 09:46",
-      },
-      onward: {
-        title: "Arrival plan unchanged",
-        instruction: "Onward connections are unaffected by the boarding gate change.",
-        action: "Keep existing plan",
-        time: "Updated 09:47",
-      },
-    },
-  },
-  {
-    id: "transfer-risk",
-    label: "Transfer risk",
-    status: "Connection risk",
-    severity: "notice",
-    headline: "Onward mobility becomes part of the port experience.",
-    operatorNote:
-      "The guidance layer can protect passenger confidence after disembarkation, not only inside the terminal.",
-    icon: TimerReset,
-    messages: {
-      home: {
-        title: "Airport connection is tight",
-        instruction: "If flying before 15:30, choose the direct airport bus after disembarkation.",
-        action: "Plan direct bus",
-        time: "Updated 09:42",
-      },
-      approach: {
-        title: "Keep airport transfer visible",
-        instruction: "Your onward transfer is time-sensitive. SmartSEA will update after arrival.",
-        action: "Watch transfer screens",
-        time: "Updated 09:43",
-      },
-      terminal: {
-        title: "Airport passengers: note Bay 3",
-        instruction: "Direct bus capacity is available. Boarding guidance will appear at arrival.",
-        action: "Remember Bay 3",
-        time: "Updated 09:44",
-      },
-      boarding: {
-        title: "Sit near forward exit if possible",
-        instruction: "Airport transfer passengers should disembark promptly when cleared.",
-        action: "Prepare for quick exit",
-        time: "Updated 09:45",
-      },
-      baggage: {
-        title: "Priority baggage belt 2",
-        instruction: "Airport-tagged baggage will be directed to belt 2 when available.",
-        action: "Go to belt 2",
-        time: "Updated 09:46",
-      },
-      onward: {
-        title: "Use airport bus Bay 3",
-        instruction: "Next airport bus leaves in 9 minutes. Taxi queue is 18 minutes.",
-        action: "Proceed to Bay 3",
-        time: "Updated 09:47",
-      },
-    },
-  },
-  {
-    id: "baggage",
-    label: "Baggage",
-    status: "Baggage exception",
-    severity: "notice",
-    headline: "Baggage status becomes a passenger instruction, not a desk question.",
-    operatorNote:
-      "Baggage signals can reduce uncertainty by showing where to go and what exception path applies.",
-    icon: BaggageClaim,
-    messages: {
-      home: {
-        title: "Oversized baggage desk is open",
-        instruction: "If carrying large items, arrive 15 minutes earlier for counter processing.",
-        action: "Use oversized desk",
-        time: "Updated 09:42",
-      },
-      approach: {
-        title: "Use baggage drop entrance B",
-        instruction: "Entrance B is closest to active counters and oversized processing.",
-        action: "Follow Entrance B",
-        time: "Updated 09:43",
-      },
-      terminal: {
-        title: "Print tags before counter queue",
-        instruction: "Tag kiosks are available on the right. Counter queue is for tagged bags.",
-        action: "Print tag first",
-        time: "Updated 09:44",
-      },
-      boarding: {
-        title: "Baggage accepted until 10:50",
-        instruction: "Passengers without checked bags may proceed directly to document check.",
-        action: "Complete drop by 10:50",
-        time: "Updated 09:45",
-      },
-      baggage: {
-        title: "Exception desk moved to counter 6",
-        instruction: "Damaged tag and oversized exceptions are handled at counter 6.",
-        action: "Go to counter 6",
-        time: "Updated 09:46",
-      },
-      onward: {
-        title: "Reclaim guidance appears on arrival",
-        instruction: "Baggage belt and exception desk status will update before disembarkation.",
-        action: "Watch arrival screens",
-        time: "Updated 09:47",
-      },
-    },
-  },
-  {
-    id: "onward",
-    label: "Onward mobility",
-    status: "Mobility update",
-    severity: "normal",
-    headline: "The experience continues beyond the terminal exit.",
-    operatorNote:
-      "SmartSEA can connect port operations with the wider city and airport transport ecosystem.",
-    icon: Car,
-    messages: {
-      home: {
-        title: "Plan onward transport now",
-        instruction: "Airport bus and metro are both operating. Taxi queue is forecast moderate.",
-        action: "Choose connection",
-        time: "Updated 09:42",
-      },
-      approach: {
-        title: "Onward bays are active",
-        instruction: "Airport bus uses Bay 3. City shuttle uses Bay 5 after arrival.",
-        action: "Remember bay numbers",
-        time: "Updated 09:43",
-      },
-      terminal: {
-        title: "City transfer info available",
-        instruction: "Screens near the exit show live airport, metro, taxi, and shuttle options.",
-        action: "Check exit screens",
-        time: "Updated 09:44",
-      },
-      boarding: {
-        title: "Onward options will update onboard",
-        instruction: "Arrival guidance will refresh 20 minutes before disembarkation.",
-        action: "Review before arrival",
-        time: "Updated 09:45",
-      },
-      baggage: {
-        title: "Baggage and transfer aligned",
-        instruction: "Passengers using airport bus should use baggage belt 1 on arrival.",
-        action: "Use belt 1",
-        time: "Updated 09:46",
-      },
-      onward: {
-        title: "Fastest airport option: bus Bay 3",
-        instruction: "Airport bus departs in 12 minutes. Metro is best for city center.",
-        action: "Proceed to Bay 3",
-        time: "Updated 09:47",
-      },
-    },
-  },
-];
-
-function ProductVisual() {
+function ApiSignalsPanel({ story }: { story: ApiStory }) {
   return (
-    <aside className="product-visual" aria-label="SmartSEA journey intelligence preview">
-      <div className="visual-map">
+    <section className="signals-panel" aria-label="API signals used">
+      <div className="panel-heading">
+        <p className="eyebrow">API signals used</p>
+        <h2>Each message is traceable to transport data.</h2>
+      </div>
+      <div className="signal-grid">
+        {story.signals.map((signal) => (
+          <article className="signal-card" key={`${story.id}-${signal.label}`}>
+            <span>{signal.endpoint}</span>
+            <h3>{signal.label}</h3>
+            <strong>{signal.value}</strong>
+            <p>{signal.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function JourneyTimeline({ story }: { story: ApiStory }) {
+  return (
+    <section className="journey-timeline" aria-label="Intermodal journey timeline">
+      <div className="panel-heading">
+        <p className="eyebrow">Intermodal chain</p>
+        <h2>One passenger journey, multiple operating systems.</h2>
+      </div>
+      <div className="timeline-list">
+        {story.steps.map((step) => (
+          <article className="timeline-step" key={`${story.id}-${step.mode}-${step.time}`}>
+            <div>
+              <span>{step.time}</span>
+              <strong>{step.mode}</strong>
+            </div>
+            <section>
+              <h3>{step.title}</h3>
+              <p>{step.detail}</p>
+            </section>
+            <em>{step.state}</em>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ReferenceSection() {
+  return (
+    <section className="section-band references-band">
+      <div className="section-heading">
+        <p className="eyebrow">References</p>
+        <h2>Transport cases prove the channel. API logic proves the value.</h2>
+        <p>
+          The reference story should separate screen-network credibility from the
+          SmartSEA/PPA API use case. SpinetiX proves the channel can work in
+          transport; SmartSEA Intermodal APIs explain what should feed it.
+        </p>
+      </div>
+      <div className="reference-columns">
+        <div>
+          <h3>SpinetiX transportation references</h3>
+          <div className="reference-case-grid compact">
+            {spinetixTransportCases.map((item) => (
+              <ReferenceCaseCard item={item} key={item.title} />
+            ))}
+          </div>
+        </div>
+        <div>
+          <h3>SmartSEA/PPA API use references</h3>
+          <div className="reference-asset-grid">
+            {supportingReferenceAssets.map((asset) => (
+              <ReferenceAssetCard asset={asset} key={asset.title} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ReferenceCaseCard({ item }: { item: ReferenceCase }) {
+  const Icon = icons[item.icon];
+  return (
+    <article className="reference-case">
+      <Icon size={20} />
+      <span>{item.location}</span>
+      <h3>{item.title}</h3>
+      <p>{item.body}</p>
+      <strong>{item.proof}</strong>
+    </article>
+  );
+}
+
+function ReferenceAssetCard({ asset }: { asset: ReferenceAsset }) {
+  return (
+    <article className="reference-asset-card">
+      <img src={asset.src} alt={asset.title} />
+      <div>
+        <span>{asset.source}</span>
+        <h3>{asset.title}</h3>
+        <p>{asset.body}</p>
+      </div>
+    </article>
+  );
+}
+
+function Metric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="metric-card">
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
+  );
+}
+
+function ApiSystemVisual() {
+  return (
+    <aside className="api-system-visual" aria-label="SmartSEA intermodal API system preview">
+      <div className="api-visual-header">
         <img
-          src="/assets/visuals/smartsea-passenger-flow-map.png"
-          alt="Abstract SmartSEA passenger flow and terminal operations map"
+          src="/assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
+          alt="SmartSEA powered by SITA"
         />
+        <span>Standalone GIDP snapshot</span>
       </div>
-      <div className="floating-card card-live">
-        <span className="status-dot" />
-        <div>
-          <strong>Live journey context</strong>
-          <span>Terminal state, disruptions, onward mobility</span>
-        </div>
+      <div className="api-node-grid">
+        <ApiNode icon="ship" title="Maritime" body="PPA schedules + AIS/ETA" />
+        <ApiNode icon="train" title="Rail" body="GTFS + realtime updates" />
+        <ApiNode icon="plane" title="Airport" body="ATH schedules + status" />
+        <ApiNode icon="radar" title="Risk" body="MCT margin and confidence" />
       </div>
-      <div className="floating-card card-guidance">
-        <MonitorPlay size={18} />
-        <div>
-          <strong>Screen-ready guidance</strong>
-          <span>Message, location, priority, next action</span>
-        </div>
+      <div className="api-decision-strip">
+        <span>Intermodal itinerary</span>
+        <strong>INT-20260427-002</strong>
+        <span>-62 min MCT margin</span>
       </div>
-      <div className="signal-stack">
-        <span>
-          <Network size={15} /> Intermodal data
-        </span>
-        <span>
-          <Radar size={15} /> Passenger flow
-        </span>
-        <span>
-          <MonitorPlay size={15} /> Any CMS channel
-        </span>
+      <div className="api-stat-row">
+        {heroStats.map((stat) => (
+          <Metric key={stat.label} label={stat.label} value={stat.value} />
+        ))}
       </div>
     </aside>
+  );
+}
+
+function ApiNode({ icon, title, body }: { icon: IconKey; title: string; body: string }) {
+  const Icon = icons[icon];
+  return (
+    <article className="api-node">
+      <Icon size={19} />
+      <strong>{title}</strong>
+      <span>{body}</span>
+    </article>
   );
 }
