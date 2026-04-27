@@ -554,4 +554,46 @@ export const supportingReferenceAssets: ReferenceAsset[] = [
     src: "/assets/references/copenhagen-malmo-port-reference.svg",
     source: "User-provided reference visual",
   },
+  {
+    title: "Carnival Cruise Line screen reference",
+    body: "A cruise passenger information surface that proves the channel pattern for boarding, service, and wayfinding communications.",
+    src: "/assets/references/carnival-cruise-line-screen.png",
+    source: "RelevantReferencesForTransportation.docx",
+  },
+  {
+    title: "Cruise journey context",
+    body: "Cruise imagery anchors the PPA use case around passenger movement, timing, and intermodal handoff rather than generic signage.",
+    src: "/assets/references/cruise-ship-reference.jpg",
+    source: "RelevantReferencesForTransportation.docx",
+  },
+  {
+    title: "Geneva transit widget",
+    body: "Transport widget example combining service departures, local context, and photo guidance for a clear passenger decision point.",
+    src: "/assets/references/geneva-transit-widget-split.png",
+    source: "Supporting transport widget image",
+  },
+  {
+    title: "Geneva live departures",
+    body: "Wide passenger widget pattern for rail, bus, tram, weather, and local movement updates.",
+    src: "/assets/references/geneva-transit-widget-wide.png",
+    source: "Supporting transport widget image",
+  },
+  {
+    title: "Piraeus ARYA content template",
+    body: "Port template reference for a SmartSEA/PPA-style journey screen where the API layer can drive the visible instruction.",
+    src: "/assets/references/piraeus-arya-template.png",
+    source: "DescriptionGeneraleSpinetiX-transportation PIRAEUS.docx",
+  },
+  {
+    title: "Baggage and FIDS reference",
+    body: "Airport arrivals and baggage information show how transport APIs can connect onward guidance after disembarkation.",
+    src: "/assets/references/baggage-fids-reference.jpg",
+    source: "Supporting baggage/FIDS image",
+  },
+  {
+    title: "Transport widget reference grid",
+    body: "Widget library evidence for turning transport API signals into designed passenger-facing modules.",
+    src: "/assets/references/transport-widget-reference-grid.png",
+    source: "Transportation_Widget.pptx",
+  },
 ];
