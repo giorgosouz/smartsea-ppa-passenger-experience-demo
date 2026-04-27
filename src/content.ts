@@ -41,6 +41,12 @@ export type ApiStory = {
     body: string;
     action: string;
   };
+  outcomes: Array<{
+    label: string;
+    value: string;
+    body: string;
+  }>;
+  screens: PassengerScreenMessage[];
   snapshot: {
     itinerary: string;
     risk: string;
@@ -60,6 +66,17 @@ export type ApiStory = {
     detail: string;
     state: string;
   }>;
+  icon: IconKey;
+};
+
+export type PassengerScreenMessage = {
+  zone: string;
+  context: string;
+  title: string;
+  instruction: string;
+  action: string;
+  status: string;
+  time: string;
   icon: IconKey;
 };
 
@@ -87,31 +104,31 @@ export const heroStats = [
 export const apiPillars = [
   {
     title: "The product is the API layer",
-    body: "SmartSEA Intermodal APIs normalize port, rail, airport, event, vessel, and disruption data into one passenger journey layer.",
+    body: "SmartSEA Intermodal APIs turn port, rail, airport, vessel, event, and disruption updates into decisions PPA can act on.",
     icon: "api",
   },
   {
     title: "CMS and screens are channels",
-    body: "A CMS can publish the message, but the strategic value is deciding which live instruction should exist in the first place.",
+    body: "The same decision can feed terminal screens, staff tools, mobile, web, audio, and future channels without changing the story.",
     icon: "monitor",
   },
   {
     title: "Connection risk becomes visible",
-    body: "The platform turns schedules and realtime updates into MCT margins, risk labels, passenger counts, and recovery ownership.",
+    body: "PPA sees which passenger groups are close to missing a transfer before confusion reaches the terminal floor.",
     icon: "radar",
   },
   {
     title: "Recovery action is generated",
-    body: "When the journey breaks, the system produces the action, owner hint, confidence, and passenger instruction needed to respond.",
+    body: "When the journey breaks, operators get the next action and passengers see a clear instruction on the nearest channel.",
     icon: "shield",
   },
 ] satisfies Array<{ title: string; body: string; icon: IconKey }>;
 
 export const apiProofGroups: ApiProofGroup[] = [
   {
-    title: "Swagger schedule foundations",
-    source: "GIDP Swagger",
-    body: "Master data and schedules expose the basic transport graph PPA needs before any passenger guidance can be trusted.",
+    title: "Authorized schedules",
+    source: "Transport network",
+    body: "Airport, port, and rail schedules give PPA a trusted base for passenger guidance.",
     endpoints: [
       "/airports/authorized",
       "/maritime/ports/authorized",
@@ -122,9 +139,9 @@ export const apiProofGroups: ApiProofGroup[] = [
     icon: "database",
   },
   {
-    title: "Realtime movement layer",
-    source: "GIDP demo API",
-    body: "Schedule endpoints are enriched with ETA, status, gate, terminal, AIS, GTFS-RT, and weather-style context.",
+    title: "Live movement updates",
+    source: "Live operations",
+    body: "ETA, status, gate, terminal, AIS, rail realtime, and service context keep instructions current.",
     endpoints: [
       "/airports/ATH/direction/{a|d}/dates/{start}/{end}",
       "/maritime/GRPIR/schedules/dates/{start}/{end}",
@@ -134,25 +151,25 @@ export const apiProofGroups: ApiProofGroup[] = [
     icon: "network",
   },
   {
-    title: "Intermodal itinerary API",
-    source: "Local GIDP extension",
-    body: "The platform generates connected journeys across cruise, rail, and airport legs instead of treating each mode as a separate screen feed.",
+    title: "Intermodal journeys",
+    source: "Journey planning",
+    body: "Cruise, rail, airport, and city legs are treated as one passenger journey instead of separate screen feeds.",
     endpoints: ["/intermodal/itineraries/dates/{start}/{end}"],
     metric: "11 curated journeys, including Air-Rail-Cruise chains",
     icon: "waypoints",
   },
   {
-    title: "Connection risk API",
-    source: "Local GIDP extension",
-    body: "Minimum connection time calculations convert live timetable drift into broken, high-risk, watch, or OK connection states.",
+    title: "Connection risk",
+    source: "Risk intelligence",
+    body: "Minimum connection time checks show which groups are safe, at watch, high risk, or broken.",
     endpoints: ["/connection-risk/dates/{start}/{end}"],
     metric: "3 broken MCT checks, 359 passengers at risk",
     icon: "radar",
   },
   {
-    title: "Recovery action API",
-    source: "Local GIDP extension",
-    body: "Recovery cards translate the risk state into operator-owned actions that can feed screens, staff tools, mobile, or alerts.",
+    title: "Recovery action",
+    source: "Recovery guidance",
+    body: "Recovery cards translate risk into an owner, action, confidence level, and passenger instruction.",
     endpoints: ["/ai/recovery-copilot/dates/{start}/{end}"],
     metric: "3 critical actions, 337 passengers at recovery risk",
     icon: "shield",
@@ -167,12 +184,71 @@ export const apiStories: ApiStory[] = [
     severity: "warning",
     headline: "Cruise passengers are predicted to miss the airport connection.",
     operatorNote:
-      "The API story links a maritime arrival, Piraeus rail corridor, ATH departure, MCT rule, and recovery owner into one decision.",
+      "SmartSEA combines the cruise arrival, rail timing, and flight deadline so staff can stop the group before passengers take the wrong transfer.",
     instruction: {
       title: "Airport passengers: use recovery desk before rail transfer",
       body: "Rail arrival drift reduces the airport connection margin below the required 120 minutes. Hold the group at the port mobility desk and prepare rebooking.",
       action: "Recover now: Airport + rail desk",
     },
+    outcomes: [
+      {
+        label: "Passenger result",
+        value: "No guessing at the exit",
+        body: "Airport-bound passengers are stopped before they enter the wrong transfer path.",
+      },
+      {
+        label: "Operator result",
+        value: "One recovery owner",
+        body: "Airport and rail desks receive the same action and timing context.",
+      },
+      {
+        label: "Channel result",
+        value: "Screens become useful",
+        body: "The CMS publishes the decision, not a static directional message.",
+      },
+    ],
+    screens: [
+      {
+        zone: "Hotel / trip mirror",
+        context: "Before arrival",
+        title: "Airport connection is at risk",
+        instruction: "If flying this afternoon, keep luggage ready and follow port recovery guidance on arrival.",
+        action: "Watch for airport group call",
+        status: "Connection risk",
+        time: "Updated 09:42",
+        icon: "plane",
+      },
+      {
+        zone: "Port exit screen",
+        context: "Disembarkation",
+        title: "Airport passengers: stop at Mobility Desk",
+        instruction: "Your rail connection is no longer safe. Staff will move the group through recovery handling.",
+        action: "Go to Mobility Desk",
+        status: "Recovery active",
+        time: "Updated 10:05",
+        icon: "ship",
+      },
+      {
+        zone: "Transfer bay",
+        context: "Onward mobility",
+        title: "Do not board M3 yet",
+        instruction: "Airport group is being rerouted. Coach standby and rebooking options are being prepared.",
+        action: "Wait at Bay 3",
+        status: "Hold transfer",
+        time: "Updated 10:09",
+        icon: "bus",
+      },
+      {
+        zone: "Airport help point",
+        context: "Recovery",
+        title: "EK209 passengers: assisted handling",
+        instruction: "Your connection is below minimum transfer time. Follow staff for the next feasible leg.",
+        action: "Use assisted desk",
+        status: "Critical",
+        time: "Updated 10:12",
+        icon: "alert",
+      },
+    ],
     snapshot: {
       itinerary: "INT-20260427-002",
       risk: "-62 min MCT margin",
@@ -237,12 +313,71 @@ export const apiStories: ApiStory[] = [
     severity: "notice",
     headline: "Inbound flight timing changes the port departure path.",
     operatorNote:
-      "The API layer turns flight arrival, airport rail timing, and maritime departure into a single transfer instruction.",
+      "The airport and port show the same route advice, so cruise passengers can leave baggage reclaim on the fastest protected path.",
     instruction: {
       title: "Cruise passengers: take direct rail to Piraeus",
       body: "The air-to-rail handoff is still feasible, but the port departure buffer is tightening. Route passengers to the fastest rail platform.",
       action: "Send to airport rail platform",
     },
+    outcomes: [
+      {
+        label: "Passenger result",
+        value: "Fastest path is obvious",
+        body: "Cruise passengers leave the airport on the right rail path instead of searching for port options.",
+      },
+      {
+        label: "Operator result",
+        value: "Transfer remains protected",
+        body: "The port sees the inbound group and knows whether the boarding buffer is still safe.",
+      },
+      {
+        label: "Channel result",
+        value: "Airport and port align",
+        body: "The same instruction can appear at baggage, rail, and terminal gate screens.",
+      },
+    ],
+    screens: [
+      {
+        zone: "ATH arrivals",
+        context: "Flight arrival",
+        title: "Cruise passengers: follow Piraeus rail",
+        instruction: "Your port transfer remains feasible. Use the marked rail route after baggage reclaim.",
+        action: "Follow Piraeus rail",
+        status: "Watch window",
+        time: "Updated 09:36",
+        icon: "plane",
+      },
+      {
+        zone: "Baggage reclaim",
+        context: "Bags and transfer",
+        title: "Collect bags, then Platform M3",
+        instruction: "The direct airport rail service protects your cruise boarding time.",
+        action: "Proceed to M3",
+        status: "On schedule",
+        time: "Updated 09:44",
+        icon: "baggage",
+      },
+      {
+        zone: "Rail platform",
+        context: "Public transport",
+        title: "Next direct service protects boarding",
+        instruction: "Board the next M3 service to Piraeus. Later services create a transfer risk.",
+        action: "Board next service",
+        status: "Recommended",
+        time: "Updated 10:02",
+        icon: "train",
+      },
+      {
+        zone: "Port check-in",
+        context: "Cruise terminal",
+        title: "Flight group arriving from ATH",
+        instruction: "Prepare fast check-in lane for the inbound rail group.",
+        action: "Open assisted lane",
+        status: "Inbound group",
+        time: "Updated 10:18",
+        icon: "ship",
+      },
+    ],
     snapshot: {
       itinerary: "INT-20260427-006",
       risk: "18 min positive margin",
@@ -301,12 +436,71 @@ export const apiStories: ApiStory[] = [
     severity: "notice",
     headline: "A rail delay becomes a port and airport passenger instruction.",
     operatorNote:
-      "Rail realtime does not stay buried in a transit feed; it changes which passengers should move, wait, or be recovered.",
+      "A rail delay becomes a movement decision: split airport passengers early and send them to the protected transfer bay.",
     instruction: {
       title: "Airport-bound passengers: move now to Bay 3",
       body: "Rail drift creates a tight transfer. Prioritize airport passengers and direct them to the fastest onward option.",
       action: "Prioritize airport group movement",
     },
+    outcomes: [
+      {
+        label: "Passenger result",
+        value: "No platform confusion",
+        body: "Passengers see a concrete bay instruction instead of a generic delay notice.",
+      },
+      {
+        label: "Operator result",
+        value: "Flow is split early",
+        body: "Airport passengers are separated before the delay creates congestion.",
+      },
+      {
+        label: "Channel result",
+        value: "Screens guide movement",
+        body: "Terminal, curb, and staff displays all point to the same recovery route.",
+      },
+    ],
+    screens: [
+      {
+        zone: "Terminal hall",
+        context: "Passenger flow",
+        title: "Airport group move now",
+        instruction: "Metro timing is tight. Airport passengers should leave the hall and use transfer Bay 3.",
+        action: "Move to Bay 3",
+        status: "Priority movement",
+        time: "Updated 10:40",
+        icon: "users",
+      },
+      {
+        zone: "Transfer bay",
+        context: "Curbside",
+        title: "Bay 3 is the airport route",
+        instruction: "Airport coach is now the fastest protected option. Rail passengers for the city continue to metro.",
+        action: "Board airport coach",
+        status: "Active route",
+        time: "Updated 10:43",
+        icon: "bus",
+      },
+      {
+        zone: "Rail concourse",
+        context: "Realtime rail",
+        title: "Metro delay: use coach for airport",
+        instruction: "The next M3 arrival no longer protects airport transfer times.",
+        action: "Use coach Bay 3",
+        status: "Rail delay",
+        time: "Updated 10:45",
+        icon: "train",
+      },
+      {
+        zone: "Airport terminal",
+        context: "Arrival protection",
+        title: "Port group arriving by coach",
+        instruction: "Prepare assistance for passengers arriving from Piraeus transfer Bay 3.",
+        action: "Meet coach group",
+        status: "Protected",
+        time: "Updated 11:20",
+        icon: "plane",
+      },
+    ],
     snapshot: {
       itinerary: "INT-20260427-008",
       risk: "High risk",
@@ -365,12 +559,71 @@ export const apiStories: ApiStory[] = [
     severity: "notice",
     headline: "AIS-style vessel intelligence changes the landside plan.",
     operatorNote:
-      "The maritime schedule is only the start; updated ETA/arrival state drives rail, taxi, baggage, and city-transfer instructions.",
+      "A changed vessel arrival time retimes baggage, coach dispatch, taxi flow, and city transfer guidance before crowds build up.",
     instruction: {
       title: "Delay landside transfer dispatch by 20 minutes",
       body: "The vessel arrival estimate moved. Keep transfer vehicles staged and update passenger screens when disembarkation is confirmed.",
       action: "Hold transfer release",
     },
+    outcomes: [
+      {
+        label: "Passenger result",
+        value: "Wait is explained",
+        body: "Passengers see why transfers are held instead of crowding the curb early.",
+      },
+      {
+        label: "Operator result",
+        value: "Curb pressure avoided",
+        body: "Baggage, coach, and taxi release times move together with the vessel ETA.",
+      },
+      {
+        label: "Channel result",
+        value: "Timing stays consistent",
+        body: "Every passenger-facing channel reflects the same retimed arrival plan.",
+      },
+    ],
+    screens: [
+      {
+        zone: "Disembarkation lounge",
+        context: "Vessel ETA",
+        title: "Arrival shifted by 20 minutes",
+        instruction: "Please remain in the lounge. Transfer release will update when disembarkation is confirmed.",
+        action: "Wait for exit call",
+        status: "Retimed",
+        time: "Updated 08:50",
+        icon: "ship",
+      },
+      {
+        zone: "Baggage hall",
+        context: "Baggage timing",
+        title: "Baggage release starts later",
+        instruction: "Bags will be released after the vessel clearance update. Do not queue at belts yet.",
+        action: "Stay in waiting area",
+        status: "Held",
+        time: "Updated 09:02",
+        icon: "baggage",
+      },
+      {
+        zone: "Coach bay",
+        context: "Transfer dispatch",
+        title: "Transfers held in staging",
+        instruction: "Airport and city vehicles remain staged until passenger release is confirmed.",
+        action: "Hold boarding",
+        status: "Staged",
+        time: "Updated 09:10",
+        icon: "bus",
+      },
+      {
+        zone: "City transfer",
+        context: "Onward mobility",
+        title: "New departure time posted",
+        instruction: "City and airport transfer screens will update again when exit flow opens.",
+        action: "Use updated time",
+        status: "Ready",
+        time: "Updated 09:25",
+        icon: "map",
+      },
+    ],
     snapshot: {
       itinerary: "Port movement",
       risk: "Flow pressure avoided",
@@ -429,12 +682,71 @@ export const apiStories: ApiStory[] = [
     severity: "warning",
     headline: "The system produces an operator action, not just an alert.",
     operatorNote:
-      "This is where the API sell is clearest: schedules become decisions, and decisions become passenger instructions.",
+      "The value is the handoff from alert to action: staff see ownership and passengers see one clear recovery route.",
     instruction: {
       title: "Recover INT-20260427-002 now",
       body: "Predicted lost connection from a negative MCT margin. Move the affected group to assisted handling and prepare the next feasible leg.",
       action: "Rebook to next feasible leg",
     },
+    outcomes: [
+      {
+        label: "Passenger result",
+        value: "A new plan replaces panic",
+        body: "The affected group receives one clear route to assisted handling.",
+      },
+      {
+        label: "Operator result",
+        value: "Action is owned",
+        body: "Airport and rail desks know they own the recovery before passengers arrive.",
+      },
+      {
+        label: "Channel result",
+        value: "Same message everywhere",
+        body: "Screens, staff tools, and mobile views carry the same recovery instruction.",
+      },
+    ],
+    screens: [
+      {
+        zone: "Terminal screen",
+        context: "Group handling",
+        title: "Airport passengers: assisted handling now",
+        instruction: "Your onward connection needs support. Follow staff to the recovery point before transfer.",
+        action: "Go to help point",
+        status: "Critical",
+        time: "Updated now",
+        icon: "alert",
+      },
+      {
+        zone: "Staff desk",
+        context: "Operator action",
+        title: "Airport + rail desk owns recovery",
+        instruction: "Move 78 passengers to assisted transfer and prepare the next feasible leg.",
+        action: "Start recovery",
+        status: "Owner assigned",
+        time: "+1 min",
+        icon: "shield",
+      },
+      {
+        zone: "Transfer corridor",
+        context: "Movement",
+        title: "Airport group use assisted route",
+        instruction: "Do not join general transfer queue. Staff will escort the group to recovery transport.",
+        action: "Follow assisted route",
+        status: "Live guidance",
+        time: "+2 min",
+        icon: "route",
+      },
+      {
+        zone: "Mobile / QR handoff",
+        context: "Passenger follow-up",
+        title: "New transfer under preparation",
+        instruction: "Your next feasible leg is being prepared. Keep this screen open for updates.",
+        action: "Await new time",
+        status: "Rebooking",
+        time: "+3 min",
+        icon: "monitor",
+      },
+    ],
     snapshot: {
       itinerary: "INT-20260427-002",
       risk: "Broken",

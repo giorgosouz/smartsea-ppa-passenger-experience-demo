@@ -29,6 +29,7 @@ import {
   supportingReferenceAssets,
   type ApiStory,
   type IconKey,
+  type PassengerScreenMessage,
   type ReferenceAsset,
   type ReferenceCase,
 } from "./content";
@@ -97,7 +98,7 @@ export function App() {
           </a>
           <a className={route === "demo" ? "active" : ""} href="#/demo">
             <MonitorPlay size={16} />
-            API Demo
+            Screen Demo
           </a>
         </nav>
       </header>
@@ -112,41 +113,40 @@ function ReferencePage() {
       <section className="hero-section api-hero">
         <div className="hero-copy">
           <p className="eyebrow">SmartSEA Intermodal APIs for PPA</p>
-          <h1>The product is the API layer.</h1>
+          <h1>Turn every PPA screen into the next right move.</h1>
           <p className="lede">
-            PPA can buy screens, cabling, and CMS anywhere. SmartSEA should sell
-            the intermodal API layer that connects maritime, rail, airport, vessel,
-            event, disruption, Connection risk, and Recovery action intelligence
-            into passenger-ready guidance.
+            PPA can buy screens, cabling, and CMS anywhere. The product is the
+            API layer that turns maritime, rail, airport, vessel, event, and
+            disruption data into passenger instructions people can follow.
           </p>
           <div className="hero-actions">
             <a className="button button-primary" href="#/demo">
-              Open API demo <ArrowRight size={18} />
+              See practical demo <ArrowRight size={18} />
             </a>
             <a className="button button-secondary" href="#api-proof">
-              See API proof
+              What makes it possible
             </a>
           </div>
         </div>
-        <ApiSystemVisual />
+        <JourneyOutcomeVisual />
       </section>
 
       <section className="section-band tight-band">
         <div className="section-grid two-column">
           <div>
             <p className="eyebrow">Main message</p>
-            <h2>This is not a signage modernization story.</h2>
+            <h2>Passengers do not need more information. They need a clear next action.</h2>
           </div>
           <div className="statement-stack">
             <p>
               The real sales object is SmartSEA Intermodal APIs: a journey data
-              product that turns disconnected movements into a single operational
-              picture.
+              product that turns disconnected operations into guidance passengers
+              can understand immediately.
             </p>
             <p>
-              CMS and screens are channels. The differentiated value is knowing
-              what changed, which passengers are affected, what connection is at
-              risk, and what instruction should be issued next.
+              CMS and screens are channels. The impact is the instruction:
+              where to go now, what changed, which connection is at risk, and
+              what Recovery action is already being prepared.
             </p>
           </div>
         </div>
@@ -155,10 +155,11 @@ function ReferencePage() {
       <section className="section-band">
         <div className="section-heading">
           <p className="eyebrow">What PPA buys from SmartSEA</p>
-          <h2>APIs that make the whole journey legible.</h2>
+          <h2>A passenger experience layer that shows up on real screens.</h2>
           <p>
-            The platform connects the journey from cruise arrival and terminal
-            flow through rail, road, airport, baggage, city transfer, and recovery.
+            The value is not another screen estate. It is the intelligence that
+            decides what each screen, staff tool, and mobile handoff should say
+            when a journey changes.
           </p>
         </div>
         <div className="pillar-grid">
@@ -177,12 +178,11 @@ function ReferencePage() {
 
       <section className="section-band dark-band" id="api-proof">
         <div className="section-heading">
-          <p className="eyebrow">API proof</p>
-          <h2>Swagger foundations plus GIDP demo extensions.</h2>
+          <p className="eyebrow">What makes it possible</p>
+          <h2>The API layer connects the facts behind the instruction.</h2>
           <p>
-            The standalone sales page should show the API evidence without
-            depending on localhost. These are curated snapshots from the local
-            GIDP demo and its Swagger contract.
+            Keep the technical proof available, but frame every capability by
+            what it lets PPA do for passengers and operators.
           </p>
         </div>
         <div className="api-proof-grid">
@@ -197,11 +197,6 @@ function ReferencePage() {
                 <h3>{group.title}</h3>
                 <p>{group.body}</p>
                 <strong>{group.metric}</strong>
-                <ul>
-                  {group.endpoints.map((endpoint) => (
-                    <li key={endpoint}>{endpoint}</li>
-                  ))}
-                </ul>
               </article>
             );
           })}
@@ -216,9 +211,9 @@ function ReferencePage() {
           alt="SmartSEA powered by SITA"
         />
         <p>The tender can upgrade screens and CMS.</p>
-        <h2>SmartSEA upgrades the journey data product behind them.</h2>
+        <h2>SmartSEA upgrades what passengers are told when the plan changes.</h2>
         <a className="button button-on-dark" href="#/demo">
-          Open API demo <ArrowRight size={18} />
+          See practical demo <ArrowRight size={18} />
         </a>
       </section>
     </>
@@ -235,12 +230,11 @@ function DemoPage() {
     <>
       <section className="demo-hero">
         <div className="demo-hero-copy">
-          <p className="eyebrow">API-driven demo</p>
-          <h1>Signals in. Passenger instruction out.</h1>
+          <p className="eyebrow">Practical passenger screen demo</p>
+          <h1>Show the next right move, everywhere it matters.</h1>
           <p className="lede">
-            Standalone API snapshots show which intermodal signals are used and
-            what passenger guidance is generated without exposing a raw API
-            response.
+            Pick a disruption and watch SmartSEA turn it into practical guidance
+            for the screens passengers and staff actually use.
           </p>
         </div>
         <div className={`scenario-summary severity-${selectedStory.severity}`}>
@@ -253,8 +247,8 @@ function DemoPage() {
         </div>
       </section>
 
-      <section className="demo-workbench api-workbench">
-        <div className="scenario-rail" aria-label="API scenarios">
+      <section className="demo-workbench practical-workbench">
+        <div className="scenario-rail" aria-label="Journey scenarios">
           {apiStories.map((story) => {
             const Icon = icons[story.icon];
             return (
@@ -271,7 +265,9 @@ function DemoPage() {
           })}
         </div>
 
-        <div className="api-demo-grid">
+        <div className="practical-demo-grid">
+          <OutcomeStrip story={selectedStory} />
+          <PassengerScreenWall story={selectedStory} />
           <ApiInstructionPanel story={selectedStory} />
           <ApiSignalsPanel story={selectedStory} />
           <JourneyTimeline story={selectedStory} />
@@ -281,12 +277,79 @@ function DemoPage() {
   );
 }
 
+function OutcomeStrip({ story }: { story: ApiStory }) {
+  return (
+    <section className="outcome-strip" aria-label="Scenario outcomes">
+      {story.outcomes.map((outcome) => (
+        <article key={outcome.label}>
+          <span>{outcome.label}</span>
+          <strong>{outcome.value}</strong>
+          <p>{outcome.body}</p>
+        </article>
+      ))}
+    </section>
+  );
+}
+
+function PassengerScreenWall({ story }: { story: ApiStory }) {
+  return (
+    <section className="screen-wall" aria-label="Passenger-facing screen examples">
+      <div className="panel-heading screen-wall-heading">
+        <p className="eyebrow">What appears on screens</p>
+        <h2>One disruption, four practical passenger touchpoints.</h2>
+      </div>
+      <div className="practical-screens-grid">
+        {story.screens.map((screen) => (
+          <PracticalPassengerScreen key={`${story.id}-${screen.zone}`} screen={screen} story={story} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function PracticalPassengerScreen({
+  screen,
+  story,
+}: {
+  screen: PassengerScreenMessage;
+  story: ApiStory;
+}) {
+  const Icon = icons[screen.icon];
+  return (
+    <article className={`passenger-screen practical-screen severity-${story.severity}`}>
+      <div className="screen-topbar">
+        <img
+          src="/assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
+          alt="SmartSEA powered by SITA"
+        />
+        <span>{screen.zone}</span>
+      </div>
+      <div className="screen-body">
+        <div className="screen-kicker">
+          <Icon size={17} />
+          {screen.context}
+        </div>
+        <h3>{screen.title}</h3>
+        <p>{screen.instruction}</p>
+        <div className="next-action">
+          <span>Next action</span>
+          <strong>{screen.action}</strong>
+        </div>
+      </div>
+      <div className="screen-footer">
+        <span>{screen.status}</span>
+        <span>{screen.time}</span>
+      </div>
+    </article>
+  );
+}
+
 function ApiInstructionPanel({ story }: { story: ApiStory }) {
   return (
     <article className={`instruction-panel severity-${story.severity}`}>
       <div className="summary-topline">
-        <MonitorPlay size={22} />
-        <span>Passenger instruction generated</span>
+        <ShieldCheck size={22} />
+        <span>Decision generated</span>
       </div>
       <h2>{story.instruction.title}</h2>
       <p>{story.instruction.body}</p>
@@ -308,13 +371,13 @@ function ApiSignalsPanel({ story }: { story: ApiStory }) {
   return (
     <section className="signals-panel" aria-label="API signals used">
       <div className="panel-heading">
-        <p className="eyebrow">API signals used</p>
-        <h2>Each message is traceable to transport data.</h2>
+        <p className="eyebrow">Signals behind the screen</p>
+        <h2>The instruction is practical because the data is connected.</h2>
       </div>
       <div className="signal-grid">
         {story.signals.map((signal) => (
           <article className="signal-card" key={`${story.id}-${signal.label}`}>
-            <span>{signal.endpoint}</span>
+            <span>{signal.label}</span>
             <h3>{signal.label}</h3>
             <strong>{signal.value}</strong>
             <p>{signal.body}</p>
@@ -329,8 +392,8 @@ function JourneyTimeline({ story }: { story: ApiStory }) {
   return (
     <section className="journey-timeline" aria-label="Intermodal journey timeline">
       <div className="panel-heading">
-        <p className="eyebrow">Intermodal chain</p>
-        <h2>One passenger journey, multiple operating systems.</h2>
+        <p className="eyebrow">Operational chain</p>
+        <h2>What changed behind the passenger message.</h2>
       </div>
       <div className="timeline-list">
         {story.steps.map((step) => (
@@ -420,43 +483,46 @@ function Metric({ label, value }: { label: string; value: string }) {
   );
 }
 
-function ApiSystemVisual() {
+function JourneyOutcomeVisual() {
   return (
-    <aside className="api-system-visual" aria-label="SmartSEA intermodal API system preview">
-      <div className="api-visual-header">
-        <img
-          src="/assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
-          alt="SmartSEA powered by SITA"
-        />
-        <span>Standalone GIDP snapshot</span>
+    <aside className="outcome-visual" aria-label="SmartSEA practical passenger guidance preview">
+      <article className="hero-screen-preview">
+        <div className="screen-topbar">
+          <img
+            src="/assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
+            alt="SmartSEA powered by SITA"
+          />
+          <span>Port exit screen</span>
+        </div>
+        <div className="screen-body">
+          <div className="screen-kicker">
+            <Plane size={17} />
+            Connection risk
+          </div>
+          <h3>Airport passengers: stop at Mobility Desk</h3>
+          <p>
+            Rail timing no longer protects the airport connection. Staff will
+            move your group through assisted recovery.
+          </p>
+          <div className="next-action">
+            <span>Next action</span>
+            <strong>Go to Mobility Desk</strong>
+          </div>
+        </div>
+        <div className="screen-footer">
+          <span>Recovery active</span>
+          <span>Updated 10:05</span>
+        </div>
+      </article>
+      <div className="outcome-visual-copy">
+        <p>SmartSEA Intermodal APIs decide the instruction before the CMS publishes it.</p>
+        <strong>One live decision can feed screens, staff tools, mobile, and audio.</strong>
       </div>
-      <div className="api-node-grid">
-        <ApiNode icon="ship" title="Maritime" body="PPA schedules + AIS/ETA" />
-        <ApiNode icon="train" title="Rail" body="GTFS + realtime updates" />
-        <ApiNode icon="plane" title="Airport" body="ATH schedules + status" />
-        <ApiNode icon="radar" title="Risk" body="MCT margin and confidence" />
-      </div>
-      <div className="api-decision-strip">
-        <span>Intermodal itinerary</span>
-        <strong>INT-20260427-002</strong>
-        <span>-62 min MCT margin</span>
-      </div>
-      <div className="api-stat-row">
+      <div className="api-stat-row outcome-stat-row">
         {heroStats.map((stat) => (
           <Metric key={stat.label} label={stat.label} value={stat.value} />
         ))}
       </div>
     </aside>
-  );
-}
-
-function ApiNode({ icon, title, body }: { icon: IconKey; title: string; body: string }) {
-  const Icon = icons[icon];
-  return (
-    <article className="api-node">
-      <Icon size={19} />
-      <strong>{title}</strong>
-      <span>{body}</span>
-    </article>
   );
 }
