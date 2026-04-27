@@ -556,6 +556,300 @@ h1 {
   margin-top: 30px;
 }
 
+.demo-hero,
+.demo-workbench {
+  margin: 0 auto;
+  max-width: 1220px;
+  padding-left: clamp(20px, 4vw, 56px);
+  padding-right: clamp(20px, 4vw, 56px);
+}
+
+.demo-hero {
+  align-items: end;
+  display: grid;
+  gap: clamp(24px, 5vw, 60px);
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  padding-bottom: 28px;
+  padding-top: 48px;
+}
+
+.demo-hero-copy h1 {
+  max-width: 850px;
+}
+
+.scenario-summary {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.summary-topline {
+  align-items: center;
+  display: flex;
+  font-size: 0.78rem;
+  font-weight: 850;
+  gap: 10px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.scenario-summary h2 {
+  font-size: clamp(1.65rem, 3.8vw, 3rem);
+  line-height: 1.02;
+  margin: 18px 0 0;
+}
+
+.scenario-summary p {
+  line-height: 1.55;
+  margin: 14px 0 0;
+}
+
+.scenario-summary.severity-normal {
+  background: #eef8f3;
+  border: 1px solid rgba(13, 111, 112, 0.18);
+}
+
+.scenario-summary.severity-notice {
+  background: #f7f1e4;
+  border: 1px solid rgba(201, 135, 34, 0.2);
+}
+
+.scenario-summary.severity-warning {
+  background: #f5e7d5;
+  border: 1px solid rgba(201, 88, 34, 0.22);
+}
+
+.demo-workbench {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 190px minmax(0, 1fr) minmax(310px, 0.72fr);
+  padding-bottom: 76px;
+}
+
+.scenario-rail {
+  align-self: start;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  position: sticky;
+  top: 14px;
+}
+
+.scenario-rail button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 7px;
+  color: var(--ink-soft);
+  display: flex;
+  font-weight: 780;
+  gap: 9px;
+  min-height: 42px;
+  padding: 0 10px;
+  text-align: left;
+}
+
+.scenario-rail button:hover {
+  background: rgba(13, 111, 112, 0.08);
+  color: var(--deep);
+}
+
+.scenario-rail button.active {
+  background: var(--deep);
+  color: #f6fffb;
+}
+
+.screens-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.passenger-screen {
+  background: #0f2e32;
+  border: 1px solid rgba(19, 32, 31, 0.18);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 48px rgba(14, 43, 46, 0.13);
+  color: #f6fffb;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 300px;
+  overflow: hidden;
+}
+
+.passenger-screen.severity-normal {
+  background: #0f3636;
+}
+
+.passenger-screen.severity-notice {
+  background: #263d3c;
+}
+
+.passenger-screen.severity-warning {
+  background: #3c3027;
+}
+
+.screen-topbar,
+.screen-footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.screen-topbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+  min-height: 50px;
+  padding: 11px 14px;
+}
+
+.screen-topbar img {
+  height: auto;
+  width: 116px;
+}
+
+.screen-topbar span,
+.screen-footer span {
+  color: rgba(246, 255, 251, 0.72);
+  font-size: 0.76rem;
+  font-weight: 760;
+}
+
+.screen-body {
+  display: grid;
+  padding: 22px;
+}
+
+.screen-kicker {
+  align-items: center;
+  color: #bfece3;
+  display: flex;
+  font-size: 0.78rem;
+  font-weight: 850;
+  gap: 8px;
+  letter-spacing: 0;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.passenger-screen.severity-notice .screen-kicker {
+  color: #f0c57b;
+}
+
+.passenger-screen.severity-warning .screen-kicker {
+  color: #ffc18a;
+}
+
+.screen-body h3 {
+  color: #ffffff;
+  font-size: clamp(1.45rem, 2.3vw, 2.25rem);
+  letter-spacing: 0;
+  line-height: 1.03;
+  margin: 0;
+}
+
+.screen-body p {
+  color: rgba(246, 255, 251, 0.78);
+  line-height: 1.5;
+  margin: 14px 0 0;
+}
+
+.next-action {
+  align-self: end;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius);
+  margin-top: 24px;
+  padding: 13px;
+}
+
+.next-action span,
+.next-action strong {
+  display: block;
+}
+
+.next-action span {
+  color: rgba(246, 255, 251, 0.56);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.next-action strong {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-top: 4px;
+}
+
+.screen-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.13);
+  min-height: 42px;
+  padding: 0 14px;
+}
+
+.payload-panel {
+  align-self: start;
+  background: var(--deep);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: #f6fffb;
+  overflow: hidden;
+  position: sticky;
+  top: 14px;
+}
+
+.payload-header {
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.payload-header img {
+  height: auto;
+  width: 128px;
+}
+
+.payload-header span {
+  color: #bfece3;
+  font-size: 0.74rem;
+  font-weight: 850;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.feed-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 16px 0;
+}
+
+.feed-chips span {
+  background: rgba(88, 184, 172, 0.14);
+  border: 1px solid rgba(88, 184, 172, 0.28);
+  border-radius: 999px;
+  color: #d8f7f0;
+  font-size: 0.74rem;
+  font-weight: 760;
+  padding: 6px 9px;
+}
+
+.payload-panel pre {
+  color: #d5e9e6;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  margin: 0;
+  overflow: auto;
+  padding: 18px 16px 20px;
+  white-space: pre-wrap;
+}
+
 @media (max-width: 940px) {
   .hero-section {
     grid-template-columns: 1fr;
@@ -583,6 +877,20 @@ h1 {
   .journey-card,
   .architecture-card {
     min-height: auto;
+  }
+
+  .demo-hero,
+  .demo-workbench {
+    grid-template-columns: 1fr;
+  }
+
+  .scenario-rail,
+  .payload-panel {
+    position: static;
+  }
+
+  .scenario-rail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -649,6 +957,31 @@ h1 {
 
   .capability-list svg {
     margin-bottom: 14px;
+  }
+
+  .demo-hero,
+  .demo-workbench {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .scenario-rail,
+  .screens-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scenario-rail button {
+    justify-content: center;
+  }
+
+  .passenger-screen {
+    min-height: 270px;
+  }
+
+  .payload-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
   }
 }
 
