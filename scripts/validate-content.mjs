@@ -62,7 +62,9 @@ for (const pattern of forbiddenInAppCopy) {
 }
 
 const trackedText = readFiles(
-  trackedFiles.filter((file) => TEXT_EXTENSIONS.has(extname(file))),
+  trackedFiles.filter(
+    (file) => TEXT_EXTENSIONS.has(extname(file)) && file !== "scripts/validate-content.mjs",
+  ),
 ).join("\n");
 
 const confidentialLeakPatterns = [

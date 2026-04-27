@@ -30,7 +30,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
@@ -153,6 +153,8 @@ img {
 
 .hero-copy {
   max-width: 620px;
+  min-width: 0;
+  width: 100%;
 }
 
 .eyebrow {
@@ -181,7 +183,7 @@ h1 {
   letter-spacing: 0;
   line-height: 0.92;
   margin: 0;
-  max-width: 760px;
+  max-width: 100%;
 }
 
 .lede {
@@ -577,6 +579,10 @@ h1 {
   max-width: 850px;
 }
 
+.demo-hero-copy {
+  min-width: 0;
+}
+
 .scenario-summary {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -852,7 +858,7 @@ h1 {
 
 @media (max-width: 940px) {
   .hero-section {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     min-height: auto;
     padding-top: 34px;
   }
@@ -881,7 +887,7 @@ h1 {
 
   .demo-hero,
   .demo-workbench {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .scenario-rail,
@@ -916,7 +922,8 @@ h1 {
   }
 
   h1 {
-    font-size: clamp(2.75rem, 15vw, 4.4rem);
+    font-size: clamp(2.4rem, 12.5vw, 3.25rem);
+    line-height: 1;
   }
 
   .button {
@@ -924,11 +931,11 @@ h1 {
   }
 
   .product-visual {
-    min-height: 360px;
+    min-height: 420px;
   }
 
   .visual-map {
-    height: 70%;
+    height: 64%;
     width: 90%;
   }
 
@@ -940,6 +947,12 @@ h1 {
 
   .signal-stack {
     left: 0;
+    top: 57%;
+  }
+
+  .card-payload {
+    bottom: 0;
+    right: 0;
   }
 
   .section-band,

@@ -41,9 +41,20 @@ export function App() {
 
   useEffect(() => {
     const onHashChange = () => setRoute(getRoute());
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
+
+  useEffect(() => {
+    window.scrollTo({ behavior: "auto", left: 0, top: 0 });
+    const timeout = window.setTimeout(() => {
+      window.scrollTo({ behavior: "auto", left: 0, top: 0 });
+    }, 0);
+    return () => window.clearTimeout(timeout);
+  }, [route]);
 
   return (
     <div className="app-shell">
