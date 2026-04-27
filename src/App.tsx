@@ -87,7 +87,7 @@ export function App() {
       <header className="site-header">
         <a className="brand" href="#/reference" aria-label="SmartSEA reference page">
           <img
-            src="/assets/brand/smartsea-logo-horizontal-powered-by-sita.svg"
+            src="assets/brand/smartsea-logo-horizontal-powered-by-sita.svg"
             alt="SmartSEA powered by SITA"
           />
         </a>
@@ -207,7 +207,7 @@ function ReferencePage() {
 
       <section className="closing-band">
         <img
-          src="/assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
+          src="assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
           alt="SmartSEA powered by SITA"
         />
         <p>The tender can upgrade screens and CMS.</p>
@@ -388,7 +388,7 @@ function PracticalPassengerScreen({
     >
       <div className="screen-topbar">
         <img
-          src="/assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
+          src="assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
           alt="SmartSEA powered by SITA"
         />
         <span>{screen.zone}</span>
@@ -558,7 +558,7 @@ function JourneyOutcomeVisual() {
       <article className="hero-screen-preview">
         <div className="screen-topbar">
           <img
-            src="/assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
+            src="assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
             alt="SmartSEA powered by SITA"
           />
           <span>Port exit screen</span>
