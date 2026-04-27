@@ -25,3 +25,17 @@ Success proxy:
 
 Evidence:
 - `npm run validate` should pass after the SpinetiX reference update and fail on the removed response-preview patterns.
+
+Hypothesis: after reframing the demo around SmartSEA Intermodal APIs, future edits could drift back toward signage/CMS positioning unless the validator requires the new API-layer pillars.
+
+Improvement: updated `scripts/validate-content.mjs` to require the SmartSEA Intermodal APIs message pillars and additional raw-response UI identifiers.
+
+Success proxy:
+- app copy must include SmartSEA Intermodal APIs,
+- app copy must state that the product is the API layer,
+- app copy must keep CMS and screens as channels,
+- app copy must preserve Connection risk and Recovery action language,
+- app code must not reintroduce common raw JSON/API response panel identifiers.
+
+Evidence:
+- `npm run validate` should pass for the API-first demo and fail if the required API-layer positioning is removed.

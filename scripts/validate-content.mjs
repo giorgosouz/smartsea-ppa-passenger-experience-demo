@@ -33,10 +33,11 @@ const appCopy = readFiles(
 ).join("\n");
 
 const requiredPillars = [
-  "The value is what feeds the CMS",
-  "Passengers usually do not lack signs",
-  "CMS remains the publishing channel",
-  "SmartSEA upgrades the experience",
+  "SmartSEA Intermodal APIs",
+  "The product is the API layer",
+  "CMS and screens are channels",
+  "Connection risk",
+  "Recovery action",
 ];
 
 for (const pillar of requiredPillars) {
@@ -56,6 +57,10 @@ const forbiddenInAppCopy = [
   /CMS feed preview/i,
   /cmsPayload/i,
   /JSON\.stringify\(selectedScenario/i,
+  /apiResponsePanel/i,
+  /rawResponse/i,
+  /response-preview/i,
+  /json-response/i,
   /payload-panel/i,
   /payload-header/i,
   /feed-chips/i,

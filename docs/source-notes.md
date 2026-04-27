@@ -9,6 +9,7 @@ supporting material for visual context: `RelevantReferencesForTransportation.doc
 private SmartSEA/PPA demo narrative and should not be treated as new public
 claims.
 
-Raw supporting documents, email threads, archives, and source folders remain
-local and ignored by git. Do not commit `SUPPORTING_SOURCE_MATERIAL_ORIGINALS/`,
-`mail-thread.txt`, proposal drafts, or copied raw extracts.
+Raw supporting documents, email thread exports, archives, and source folders
+remain local and ignored by git. Do not commit
+`SUPPORTING_SOURCE_MATERIAL_ORIGINALS/`, proposal drafts, or copied raw
+extracts.
