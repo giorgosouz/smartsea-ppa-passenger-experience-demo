@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.vite/
+.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local source material. Keep raw tender, email, and proposal files off GitHub.
+SUPPORTING_SOURCE_MATERIAL_ORIGINALS/
+
+# Local environment and editor state.
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

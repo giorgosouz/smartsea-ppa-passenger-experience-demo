@@ -1,0 +1,7 @@
+# Project-local Codex metadata. This file does not change permissions or security boundaries.
+
+[smartsea_demo]
+name = "SmartSEA PPA Passenger Experience Demo"
+positioning = "Passenger experience intelligence layer; CMS and screens are delivery channels."
+raw_source_material_policy = "Keep SUPPORTING_SOURCE_MATERIAL_ORIGINALS local and untracked."
+validation = "npm run validate && npm run build"
