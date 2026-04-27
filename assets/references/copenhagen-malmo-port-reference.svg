@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="568" viewBox="0 0 320 568" role="img" aria-labelledby="title desc">
+  <title id="title">Copenhagen Malmö Port passenger information reference screen</title>
+  <desc id="desc">Reference passenger information screen with ferry status, departure calls, transit departures, map context, weather, QR code, and SmartSea branding.</desc>
+  <defs>
+    <style>
+      .panel { fill: #f5f7f7; stroke: #9aa7ad; stroke-width: 1; }
+      .head { font: 700 16px Arial, sans-serif; fill: #111; }
+      .label { font: 700 8px Arial, sans-serif; fill: #26333d; }
+      .text { font: 7px Arial, sans-serif; fill: #111; }
+      .small { font: 6px Arial, sans-serif; fill: #1e2b32; }
+      .blue { fill: #2f76b8; }
+      .orange { fill: #ff851c; }
+      .green { fill: #48a23f; }
+      .white { fill: #fff; }
+    </style>
+  </defs>
+
+  <rect width="320" height="568" fill="#cfd4d6"/>
+
+  <rect x="4" y="4" width="236" height="48" rx="3" fill="#bfc5c9"/>
+  <text x="10" y="20" class="head">Copenhagen Malmö Port</text>
+  <rect x="10" y="28" width="17" height="13" rx="1" class="blue"/>
+  <text x="14" y="38" class="label white">T1</text>
+  <text x="32" y="37" class="label">Oceankaj Terminal 1</text>
+  <rect x="10" y="43" width="17" height="7" rx="1" class="blue"/>
+  <text x="15" y="49" class="small white">G1</text>
+  <text x="32" y="49" class="small">Berth A</text>
+  <rect x="244" y="4" width="72" height="48" rx="4" fill="#c6cdd1" stroke="#8aa0b8"/>
+  <text x="254" y="24" font-family="Arial, sans-serif" font-size="15" font-weight="700">11:38 AM</text>
+  <text x="259" y="40" font-family="Arial, sans-serif" font-size="15" font-weight="700">4/23/25</text>
+
+  <rect x="6" y="55" width="308" height="72" rx="2" class="panel"/>
+  <rect x="11" y="62" width="20" height="20" rx="2" class="blue"/>
+  <path d="M15 77h13l-2 3H17zM16 74h10l-1-6h-8z" fill="#fff"/>
+  <text x="35" y="67" class="label">Victoria Seaways ferry</text>
+  <text x="36" y="79" class="small">DFDS SEAWAYS - LF</text>
+  <text x="281" y="67" text-anchor="end" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#27a844">arrived</text>
+  <text x="232" y="80" class="small">Wed Apr 23 11:59:59 2025</text>
+  <text x="31" y="101" class="label">Destination</text>
+  <text x="31" y="114" class="text">Helsingborg cruise port - SEHEL</text>
+  <text x="252" y="101" class="label">Departure</text>
+  <text x="232" y="114" class="text">Wed Apr 23 23:57:59 2025</text>
+
+  <rect x="5" y="128" width="310" height="15" rx="2" class="orange"/>
+  <text x="17" y="138" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#fff">Departure last call: Wed Apr 23 22:37:59 2025</text>
+  <text x="225" y="138" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#fff">Departure last call: Wed</text>
+
+  <rect x="5" y="148" width="310" height="107" rx="2" class="panel"/>
+  <rect x="11" y="154" width="24" height="20" rx="2" class="blue"/>
+  <path d="M15 169h17l-2 3H17zM16 165h13l-2-7H16z" fill="#fff"/>
+  <text x="42" y="166" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#26333d">Departures</text>
+  <rect x="11" y="182" width="298" height="14" class="blue"/>
+  <text x="16" y="192" class="label white">STD</text>
+  <text x="52" y="192" class="label white">Destination</text>
+  <text x="150" y="192" class="label white">Flight Nr.</text>
+  <text x="219" y="192" class="label white">Airline</text>
+  <text x="270" y="192" class="label white">Status</text>
+  <g class="text">
+    <text x="15" y="208">14:45</text><text x="52" y="208">Oslo Airport, Gardermoen</text><text x="151" y="208">SK 1458</text><text x="274" y="208">scheduled</text>
+    <text x="15" y="222">14:45</text><text x="52" y="222">Oslo Airport, Gardermoen</text><text x="151" y="222">A3 3324</text><text x="274" y="222">scheduled</text>
+    <text x="15" y="236">14:45</text><text x="52" y="236">Oslo Airport, Gardermoen</text><text x="151" y="236">SQ 2626</text><text x="274" y="236">scheduled</text>
+    <text x="15" y="250">14:50</text><text x="52" y="250">Amsterdam Airport Schiphol</text><text x="151" y="250">KL 1270</text><text x="274" y="250">scheduled</text>
+  </g>
+  <g transform="translate(219 202)">
+    <path d="M0 4h22l-4 5H4z" fill="#2f76b8"/><path d="M2 18h22l-5 5H4z" fill="#f7b733"/><path d="M2 33h23l-4 5H5z" fill="#1f8cc9"/>
+  </g>
+
+  <g transform="translate(5 260)">
+    <rect width="150" height="66" rx="2" class="panel"/>
+    <rect x="6" y="8" width="22" height="22" rx="2" class="blue"/>
+    <path d="M11 12h12v13H11zM10 25h14v3H10z" fill="#fff"/>
+    <text x="34" y="15" class="label">Oceankaj</text>
+    <text x="88" y="15" class="small">3 min</text>
+    <text x="34" y="29" class="text">164  Oceankaj</text><text x="118" y="29" class="text">6 min</text>
+    <text x="34" y="43" class="text">164  Oceankaj</text><text x="118" y="43" class="text">26 min</text>
+    <text x="34" y="57" class="text">164  Oceankaj</text><text x="118" y="57" class="text">47 min</text>
+  </g>
+  <g transform="translate(165 260)">
+    <rect width="150" height="66" rx="2" class="panel"/>
+    <rect x="6" y="8" width="22" height="22" rx="2" class="blue"/>
+    <path d="M10 11h14v16H10zM13 27h8v3h-8z" fill="#fff"/>
+    <text x="34" y="15" class="label">Nordhavn St.</text>
+    <text x="86" y="15" class="small">46 min</text>
+    <text x="34" y="29" class="text">B  Høje Taastrup St.</text><text x="120" y="29" class="text">1 min</text>
+    <text x="34" y="43" class="text">E  Køge St.</text><text x="120" y="43" class="text">3 min</text>
+    <text x="34" y="57" class="text">A  Hundige St.</text><text x="120" y="57" class="text">5 min</text>
+  </g>
+  <g transform="translate(5 331)">
+    <rect width="150" height="66" rx="2" class="panel"/>
+    <rect x="6" y="8" width="22" height="22" rx="2" class="blue"/>
+    <path d="M9 24h17l-2 4H11zM12 12h11l3 11H9z" fill="#fff"/>
+    <text x="34" y="15" class="label">Orientkaj St.</text>
+    <text x="92" y="15" class="small">34 min</text>
+    <text x="34" y="29" class="text">991  Teglholmen</text><text x="119" y="29" class="text">1 min</text>
+    <text x="34" y="43" class="text">991  Orientkaj St.</text><text x="119" y="43" class="text">20 min</text>
+    <text x="34" y="57" class="text">991  Teglholmen</text><text x="119" y="57" class="text">30 min</text>
+  </g>
+  <g transform="translate(165 331)">
+    <rect width="150" height="66" rx="2" class="panel"/>
+    <rect x="6" y="8" width="22" height="22" rx="2" class="blue"/>
+    <path d="M11 12h12v13H11zM10 25h14v3H10z" fill="#fff"/>
+    <text x="34" y="15" class="label">Orientkaj St.</text>
+    <text x="92" y="15" class="small">35 min</text>
+    <text x="34" y="29" class="text">M4  Orientkaj St. (Metro)</text><text x="121" y="29" class="text">2 min</text>
+    <text x="34" y="43" class="text">M4  Orientkaj St. (Metro)</text><text x="121" y="43" class="text">6 min</text>
+    <text x="34" y="57" class="text">M4  Orientkaj St. (Metro)</text><text x="121" y="57" class="text">10 min</text>
+  </g>
+
+  <rect x="5" y="401" width="310" height="124" rx="2" fill="#dcebe7" stroke="#9aa7ad"/>
+  <path d="M5 470c45-30 68-34 104-23 40 12 55 4 89-25 39-32 72-23 117-10v113H5z" fill="#bfe4df"/>
+  <path d="M5 455c55-19 95-14 145-41 45-24 103-25 165-7" fill="none" stroke="#78c4bc" stroke-width="5" opacity=".8"/>
+  <path d="M22 509L296 422M25 430l178 78M104 405l-28 118M188 402l13 123" stroke="#f8f8f8" stroke-width="3"/>
+  <path d="M24 509L296 422M25 430l178 78M104 405l-28 118M188 402l13 123" stroke="#adbfc3" stroke-width="1"/>
+  <circle cx="183" cy="457" r="5" fill="#d84531" stroke="#fff" stroke-width="2"/>
+  <circle cx="188" cy="485" r="4" fill="#2f76b8"/>
+  <circle cx="216" cy="451" r="4" fill="#2f76b8"/>
+  <circle cx="241" cy="443" r="4" fill="#48a23f"/>
+  <rect x="98" y="457" width="10" height="8" rx="1" class="blue"/>
+  <text x="100" y="464" class="small white">H</text>
+
+  <rect x="5" y="530" width="310" height="34" fill="#c3c8ca"/>
+  <path d="M12 546c6-9 17-11 27-7-6 2-10 5-12 10 7-3 13-2 18 3-12 4-24 2-33-6z" fill="#111"/>
+  <text x="50" y="549" font-family="Arial, sans-serif" font-size="17" fill="#111">SmartSea</text>
+  <text x="51" y="559" font-family="Arial, sans-serif" font-size="6" fill="#111">Powered by SITA</text>
+  <g transform="translate(246 539)" stroke="#111" stroke-width="1.4" fill="none">
+    <circle cx="10" cy="10" r="7"/>
+    <path d="M10 0v4M10 16v4M0 10h4M16 10h4M3 3l3 3M17 3l-3 3"/>
+    <path d="M25 18h33M29 13h26M34 8h17"/>
+  </g>
+  <g transform="translate(282 532)" fill="#111">
+    <rect width="4" height="4"/><rect x="8" width="4" height="4"/><rect x="16" width="4" height="4"/><rect x="24" width="4" height="4"/>
+    <rect y="8" width="4" height="4"/><rect x="16" y="8" width="4" height="4"/><rect x="24" y="8" width="4" height="4"/>
+    <rect x="8" y="16" width="4" height="4"/><rect x="16" y="16" width="4" height="4"/>
+    <rect y="24" width="4" height="4"/><rect x="8" y="24" width="4" height="4"/><rect x="24" y="24" width="4" height="4"/>
+  </g>
+</svg>
