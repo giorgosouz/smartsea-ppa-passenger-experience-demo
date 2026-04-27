@@ -558,13 +558,13 @@ export const supportingReferenceAssets: ReferenceAsset[] = [
     title: "Carnival Cruise Line screen reference",
     body: "A cruise passenger information surface that proves the channel pattern for boarding, service, and wayfinding communications.",
     src: "/assets/references/carnival-cruise-line-screen.png",
-    source: "RelevantReferencesForTransportation.docx",
+    source: "Supporting cruise reference",
   },
   {
     title: "Cruise journey context",
     body: "Cruise imagery anchors the PPA use case around passenger movement, timing, and intermodal handoff rather than generic signage.",
     src: "/assets/references/cruise-ship-reference.jpg",
-    source: "RelevantReferencesForTransportation.docx",
+    source: "Supporting cruise reference",
   },
   {
     title: "Geneva transit widget",
@@ -582,7 +582,7 @@ export const supportingReferenceAssets: ReferenceAsset[] = [
     title: "Piraeus ARYA content template",
     body: "Port template reference for a SmartSEA/PPA-style journey screen where the API layer can drive the visible instruction.",
     src: "/assets/references/piraeus-arya-template.png",
-    source: "DescriptionGeneraleSpinetiX-transportation PIRAEUS.docx",
+    source: "Piraeus transport brief",
   },
   {
     title: "Baggage and FIDS reference",
@@ -594,6 +594,6 @@ export const supportingReferenceAssets: ReferenceAsset[] = [
     title: "Transport widget reference grid",
     body: "Widget library evidence for turning transport API signals into designed passenger-facing modules.",
     src: "/assets/references/transport-widget-reference-grid.png",
-    source: "Transportation_Widget.pptx",
+    source: "Transport widget deck",
   },
 ];

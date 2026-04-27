@@ -238,9 +238,9 @@ function DemoPage() {
           <p className="eyebrow">API-driven demo</p>
           <h1>Signals in. Passenger instruction out.</h1>
           <p className="lede">
-            Switch between standalone API snapshot stories. Each scenario shows
-            which intermodal signals are used and what passenger guidance is
-            generated without exposing a raw API response.
+            Standalone API snapshots show which intermodal signals are used and
+            what passenger guidance is generated without exposing a raw API
+            response.
           </p>
         </div>
         <div className={`scenario-summary severity-${selectedStory.severity}`}>
@@ -359,8 +359,8 @@ function ReferenceSection() {
         <h2>Transport cases prove the channel. API logic proves the value.</h2>
         <p>
           The reference story should separate screen-network credibility from the
-          SmartSEA/PPA API use case. SpinetiX proves the channel can work in
-          transport; SmartSEA Intermodal APIs explain what should feed it.
+          SmartSEA/PPA API use case. SpinetiX transport references support the
+          channel argument; SmartSEA Intermodal APIs explain what should feed it.
         </p>
       </div>
       <div className="reference-columns">
