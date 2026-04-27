@@ -222,9 +222,15 @@ function ReferencePage() {
 
 function DemoPage() {
   const [selectedStoryId, setSelectedStoryId] = useState(apiStories[0].id);
+  const [selectedScreenIndex, setSelectedScreenIndex] = useState(0);
   const selectedStory =
     apiStories.find((story) => story.id === selectedStoryId) ?? apiStories[0];
+  const selectedScreen = selectedStory.screens[selectedScreenIndex] ?? selectedStory.screens[0];
   const StoryIcon = icons[selectedStory.icon];
+
+  useEffect(() => {
+    setSelectedScreenIndex(0);
+  }, [selectedStoryId]);
 
   return (
     <>
@@ -266,6 +272,12 @@ function DemoPage() {
         </div>
 
         <div className="practical-demo-grid">
+          <ScreenStage
+            selectedIndex={selectedScreenIndex}
+            selectedScreen={selectedScreen}
+            setSelectedIndex={setSelectedScreenIndex}
+            story={selectedStory}
+          />
           <OutcomeStrip story={selectedStory} />
           <PassengerScreenWall story={selectedStory} />
           <ApiInstructionPanel story={selectedStory} />
@@ -274,6 +286,59 @@ function DemoPage() {
         </div>
       </section>
     </>
+  );
+}
+
+function ScreenStage({
+  selectedIndex,
+  selectedScreen,
+  setSelectedIndex,
+  story,
+}: {
+  selectedIndex: number;
+  selectedScreen: PassengerScreenMessage;
+  setSelectedIndex: (index: number) => void;
+  story: ApiStory;
+}) {
+  return (
+    <section className={`screen-stage severity-${story.severity}`} aria-label="Active passenger screen preview">
+      <div className="stage-display">
+        <div className="stage-display-topline">
+          <span>Live passenger channel</span>
+          <strong>{selectedScreen.zone}</strong>
+        </div>
+        <PracticalPassengerScreen featured screen={selectedScreen} story={story} />
+      </div>
+      <aside className="stage-sidebar">
+        <div className="stage-status">
+          <span>{story.status}</span>
+          <h2>{selectedScreen.title}</h2>
+          <p>{selectedScreen.instruction}</p>
+          <div className="stage-action">
+            <span>Publishing now</span>
+            <strong>{selectedScreen.action}</strong>
+          </div>
+        </div>
+        <div className="stage-screen-list" aria-label="Screen channel selector">
+          {story.screens.map((screen, index) => {
+            const Icon = icons[screen.icon];
+            return (
+              <button
+                aria-pressed={selectedIndex === index}
+                className={selectedIndex === index ? "active" : ""}
+                key={`${story.id}-${screen.zone}-button`}
+                onClick={() => setSelectedIndex(index)}
+                type="button"
+              >
+                <Icon size={17} />
+                <span>{screen.zone}</span>
+                <strong>{screen.status}</strong>
+              </button>
+            );
+          })}
+        </div>
+      </aside>
+    </section>
   );
 }
 
@@ -295,8 +360,8 @@ function PassengerScreenWall({ story }: { story: ApiStory }) {
   return (
     <section className="screen-wall" aria-label="Passenger-facing screen examples">
       <div className="panel-heading screen-wall-heading">
-        <p className="eyebrow">What appears on screens</p>
-        <h2>One disruption, four practical passenger touchpoints.</h2>
+        <p className="eyebrow">Screen network</p>
+        <h2>Same decision, adapted to every passenger touchpoint.</h2>
       </div>
       <div className="practical-screens-grid">
         {story.screens.map((screen) => (
@@ -308,15 +373,19 @@ function PassengerScreenWall({ story }: { story: ApiStory }) {
 }
 
 function PracticalPassengerScreen({
+  featured = false,
   screen,
   story,
 }: {
+  featured?: boolean;
   screen: PassengerScreenMessage;
   story: ApiStory;
 }) {
   const Icon = icons[screen.icon];
   return (
-    <article className={`passenger-screen practical-screen severity-${story.severity}`}>
+    <article
+      className={`passenger-screen practical-screen ${featured ? "featured-screen" : ""} severity-${story.severity}`}
+    >
       <div className="screen-topbar">
         <img
           src="/assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
