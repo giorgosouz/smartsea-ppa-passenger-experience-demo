@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "validate": "node scripts/validate-content.mjs",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview"
   },
