@@ -7,7 +7,6 @@ import {
   Car,
   CheckCircle2,
   Clock,
-  DatabaseZap,
   Gauge,
   GitBranch,
   Hotel,
@@ -169,6 +168,45 @@ function ReferencePlaceholder() {
         </div>
       </section>
 
+      <section className="section-band spinetix-reference-section">
+        <div className="section-heading">
+          <p className="eyebrow">SpinetiX transport references</p>
+          <h2>Proven screen networks make the case stronger, but not complete.</h2>
+          <p>
+            SpinetiX publicly references transportation deployments across cruise,
+            airport, rail, and passenger mobility environments. That supports the
+            publishing and control layer. SmartSEA should own the live guidance
+            logic that makes those screens useful when the journey changes.
+          </p>
+        </div>
+        <div className="reference-showcase">
+          <article className="reference-visual-card">
+            <img
+              src="/assets/references/copenhagen-malmo-port-reference.svg"
+              alt="Copenhagen Malmo Port passenger information reference screen"
+            />
+            <div>
+              <p className="reference-label">Attached reference visual</p>
+              <h3>Copenhagen Malmö Port passenger information screen</h3>
+              <p>
+                This is the useful channel pattern: ferry state, departure urgency,
+                local transfers, map context, weather, and QR handoff presented as
+                one calm passenger instruction surface.
+              </p>
+            </div>
+          </article>
+          <div className="reference-case-grid">
+            {spinetixCases.map((item) => (
+              <article className="reference-case" key={item.title}>
+                <item.icon size={20} />
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section-band">
         <div className="section-grid two-column">
           <div>
@@ -255,22 +293,6 @@ function DemoPage() {
             />
           ))}
         </div>
-
-        <aside className="payload-panel" aria-label="CMS payload preview">
-          <div className="payload-header">
-            <img
-              src="/assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
-              alt="SmartSEA powered by SITA"
-            />
-            <span>CMS feed preview</span>
-          </div>
-          <div className="feed-chips">
-            {selectedScenario.feeds.map((feed) => (
-              <span key={feed}>{feed}</span>
-            ))}
-          </div>
-          <pre>{JSON.stringify(selectedScenario.cmsPayload, null, 2)}</pre>
-        </aside>
       </section>
     </>
   );
@@ -360,8 +382,36 @@ const architecture = [
   },
   {
     title: "Publish",
-    body: "Feed CMS, screens, mobile, and staff channels with consistent guidance payloads.",
+    body: "Feed CMS, screens, mobile, and staff channels with consistent guidance instructions.",
     icon: MonitorPlay,
+  },
+];
+
+const spinetixCases = [
+  {
+    title: "Carnival Cruise Line",
+    body: "Cruise signage reference from desk registration to wayfinding and advertising, with SpinetiX noting more than 300 screens equipped since 2015.",
+    icon: Ship,
+  },
+  {
+    title: "Abu Dhabi International Airport",
+    body: "Airport reference spanning gate information, flight schedules, and Etihad lounge passenger communications.",
+    icon: Plane,
+  },
+  {
+    title: "Grand Central Terminal",
+    body: "Historic rail terminal information modernization while preserving the atmosphere of the landmark environment.",
+    icon: Route,
+  },
+  {
+    title: "KLIA TV Malaysia",
+    body: "Airport webTV screens combining news video, flight schedules, destination weather, and targeted advertising.",
+    icon: MonitorPlay,
+  },
+  {
+    title: "Bagdad Airport",
+    body: "Large video wall reference for destination weather, destination time, and tourism content.",
+    icon: Radar,
   },
 ];
 
@@ -418,18 +468,8 @@ type Scenario = {
   severity: Severity;
   headline: string;
   operatorNote: string;
-  feeds: string[];
   icon: typeof AlertTriangle;
   messages: Record<TouchpointId, TouchpointMessage>;
-  cmsPayload: {
-    event: string;
-    priority: string;
-    audience: string;
-    location: string;
-    message: string;
-    validUntil: string;
-    channels: string[];
-  };
 };
 
 const touchpoints: Touchpoint[] = [
@@ -450,7 +490,6 @@ const scenarios: Scenario[] = [
     headline: "Passengers receive calm, sequenced instructions.",
     operatorNote:
       "SmartSEA keeps each touchpoint aligned with the journey stage instead of repeating generic directions.",
-    feeds: ["Vessel ETA", "Gate status", "Passenger flow", "Mobility timetable"],
     icon: CheckCircle2,
     messages: {
       home: {
@@ -490,15 +529,6 @@ const scenarios: Scenario[] = [
         time: "Updated 09:48",
       },
     },
-    cmsPayload: {
-      event: "normal_flow",
-      priority: "standard",
-      audience: "all departing passengers",
-      location: "terminal network",
-      message: "Journey operating normally. Continue to assigned terminal and gate.",
-      validUntil: "2026-04-27T10:15:00+03:00",
-      channels: ["terminal screens", "approach displays", "mobile web", "staff view"],
-    },
   },
   {
     id: "delay",
@@ -508,7 +538,6 @@ const scenarios: Scenario[] = [
     headline: "A vessel delay becomes useful passenger guidance.",
     operatorNote:
       "Instead of only announcing a delay, SmartSEA changes timing, routes, and wait-area instructions.",
-    feeds: ["Vessel ETA", "Berth readiness", "Passenger dwell", "Retail occupancy"],
     icon: Clock,
     messages: {
       home: {
@@ -548,15 +577,6 @@ const scenarios: Scenario[] = [
         time: "Updated 09:48",
       },
     },
-    cmsPayload: {
-      event: "vessel_delay",
-      priority: "medium",
-      audience: "departing passengers for Gate E8",
-      location: "pre-arrival, terminal hall, boarding gate",
-      message: "Boarding expected at 11:05. Wait in Zone B and return to Gate E8 at 10:55.",
-      validUntil: "2026-04-27T10:55:00+03:00",
-      channels: ["terminal screens", "hotel feed", "approach displays", "staff view"],
-    },
   },
   {
     id: "congestion",
@@ -566,7 +586,6 @@ const scenarios: Scenario[] = [
     headline: "Crowding turns into targeted movement instructions.",
     operatorNote:
       "The system reduces stress by moving passengers away from pressure points before the terminal feels blocked.",
-    feeds: ["Camera analytics", "Queue sensors", "Security lane status", "Entry gate state"],
     icon: UsersRound,
     messages: {
       home: {
@@ -606,15 +625,6 @@ const scenarios: Scenario[] = [
         time: "Updated 09:47",
       },
     },
-    cmsPayload: {
-      event: "terminal_congestion",
-      priority: "high",
-      audience: "departing passengers in Terminal A",
-      location: "entry gates, security, baggage",
-      message: "Use Gate 2 and security lanes 5-6. Avoid queuing at Gate E8 until called.",
-      validUntil: "2026-04-27T10:20:00+03:00",
-      channels: ["entry screens", "terminal screens", "staff view", "mobile web"],
-    },
   },
   {
     id: "boarding-change",
@@ -624,7 +634,6 @@ const scenarios: Scenario[] = [
     headline: "A boarding change reaches every affected touchpoint.",
     operatorNote:
       "SmartSEA keeps the passenger message consistent across approach, terminal, gate, and staff channels.",
-    feeds: ["Gate allocation", "Berth operations", "Staff confirmation", "Passenger location"],
     icon: AlertTriangle,
     messages: {
       home: {
@@ -664,15 +673,6 @@ const scenarios: Scenario[] = [
         time: "Updated 09:47",
       },
     },
-    cmsPayload: {
-      event: "boarding_gate_change",
-      priority: "high",
-      audience: "passengers assigned to previous Gate E8",
-      location: "terminal split, gate area, baggage exit",
-      message: "Boarding gate changed to E6. Gate E8 is no longer used for this sailing.",
-      validUntil: "2026-04-27T11:00:00+03:00",
-      channels: ["terminal screens", "gate displays", "approach displays", "staff view"],
-    },
   },
   {
     id: "transfer-risk",
@@ -682,7 +682,6 @@ const scenarios: Scenario[] = [
     headline: "Onward mobility becomes part of the port experience.",
     operatorNote:
       "The guidance layer can protect passenger confidence after disembarkation, not only inside the terminal.",
-    feeds: ["Vessel arrival", "Airport bus", "Metro status", "Taxi queue"],
     icon: TimerReset,
     messages: {
       home: {
@@ -722,15 +721,6 @@ const scenarios: Scenario[] = [
         time: "Updated 09:47",
       },
     },
-    cmsPayload: {
-      event: "onward_transfer_risk",
-      priority: "medium",
-      audience: "passengers with airport transfer intent",
-      location: "arrival hall, baggage, mobility bays",
-      message: "Airport bus departs Bay 3 in 9 minutes. Use belt 2 for priority baggage.",
-      validUntil: "2026-04-27T13:40:00+03:00",
-      channels: ["arrival screens", "baggage screens", "mobility bay displays", "mobile web"],
-    },
   },
   {
     id: "baggage",
@@ -740,7 +730,6 @@ const scenarios: Scenario[] = [
     headline: "Baggage status becomes a passenger instruction, not a desk question.",
     operatorNote:
       "Baggage signals can reduce uncertainty by showing where to go and what exception path applies.",
-    feeds: ["Baggage system", "Counter status", "Exception queue", "Staff desk"],
     icon: BaggageClaim,
     messages: {
       home: {
@@ -780,15 +769,6 @@ const scenarios: Scenario[] = [
         time: "Updated 09:47",
       },
     },
-    cmsPayload: {
-      event: "baggage_exception_routing",
-      priority: "medium",
-      audience: "passengers with checked or oversized baggage",
-      location: "baggage drop, terminal entry, counter 6",
-      message: "Use Entrance B. Print tags before queuing. Exceptions are handled at counter 6.",
-      validUntil: "2026-04-27T10:50:00+03:00",
-      channels: ["baggage screens", "terminal screens", "staff view"],
-    },
   },
   {
     id: "onward",
@@ -798,7 +778,6 @@ const scenarios: Scenario[] = [
     headline: "The experience continues beyond the terminal exit.",
     operatorNote:
       "SmartSEA can connect port operations with the wider city and airport transport ecosystem.",
-    feeds: ["Metro status", "Taxi queue", "Airport bus", "City traffic"],
     icon: Car,
     messages: {
       home: {
@@ -838,15 +817,6 @@ const scenarios: Scenario[] = [
         time: "Updated 09:47",
       },
     },
-    cmsPayload: {
-      event: "onward_mobility_guidance",
-      priority: "standard",
-      audience: "arriving passengers",
-      location: "arrival hall and mobility bays",
-      message: "Airport bus departs Bay 3 in 12 minutes. Metro is best for city center.",
-      validUntil: "2026-04-27T13:55:00+03:00",
-      channels: ["arrival screens", "mobility bay displays", "mobile web", "staff view"],
-    },
   },
 ];
 
@@ -863,14 +833,14 @@ function ProductVisual() {
         <span className="status-dot" />
         <div>
           <strong>Live journey context</strong>
-          <span>APIs, terminal state, onward mobility</span>
+          <span>Terminal state, disruptions, onward mobility</span>
         </div>
       </div>
-      <div className="floating-card card-payload">
-        <DatabaseZap size={18} />
+      <div className="floating-card card-guidance">
+        <MonitorPlay size={18} />
         <div>
-          <strong>CMS-ready payload</strong>
-          <span>Message, location, priority, expiry</span>
+          <strong>Screen-ready guidance</strong>
+          <span>Message, location, priority, next action</span>
         </div>
       </div>
       <div className="signal-stack">

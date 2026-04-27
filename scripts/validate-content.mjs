@@ -53,6 +53,12 @@ const forbiddenInAppCopy = [
   /insider context/i,
   /internal context/i,
   /bid history/i,
+  /CMS feed preview/i,
+  /cmsPayload/i,
+  /JSON\.stringify\(selectedScenario/i,
+  /payload-panel/i,
+  /payload-header/i,
+  /feed-chips/i,
 ];
 
 for (const pattern of forbiddenInAppCopy) {

@@ -14,3 +14,14 @@ Success proxy:
 
 Evidence:
 - `npm run validate` should pass before every content or UI commit.
+
+Hypothesis: once the demo moves away from a raw CMS/API response preview, future edits could accidentally reintroduce JSON-response UI and weaken the passenger-facing story.
+
+Improvement: extended `scripts/validate-content.mjs` to block the removed response-preview identifiers and labels.
+
+Success proxy:
+- demo code and styling no longer contain the removed response-preview surface,
+- `npm run validate` fails if that surface is reintroduced with the same labels or component names.
+
+Evidence:
+- `npm run validate` should pass after the SpinetiX reference update and fail on the removed response-preview patterns.
