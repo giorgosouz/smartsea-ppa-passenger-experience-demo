@@ -96,29 +96,29 @@ export type ReferenceAsset = {
 };
 
 export const visionIntro = {
-  kicker: "SmartSEA passenger information layer",
+  kicker: "The shift",
   title: "From screens to passenger information",
   subtitle:
-    "The signage refresh at Piraeus Cruise Terminal restores display reliability. The bigger opportunity is to turn that estate into a governed passenger information layer.",
+    "The current program modernizes signage infrastructure. That is necessary, but it does not by itself change how information is defined, managed or used.",
   body: [
-    "Across transport hubs, signage is evolving from static display into an operational system: real-time communication, disruption management, and guidance that connects passengers to their next step.",
-    "SmartSEA is not positioned as the installation layer. It shows how the physical refresh can become the foundation for central publishing, zone-based content control, priority messaging, and live operational data.",
-    "The value is not the screen. The value is what PPA can control, automate and communicate through it.",
+    "Without a clear information layer, a new screen estate risks behaving much like the one it replaces: content remains static, updates remain manual and messages are not always aligned with real-time operations.",
+    "A modern CMS can support APIs and real-time inputs. The value is no longer only in displaying information; it is in deciding what information should be displayed, when and why.",
+    "SmartSEA shows how the physical refresh can become the foundation of a governed passenger information layer: centralized publishing, zone-based content, priority messaging and live operational data. The value is not the screen. The value is what PPA can control, automate and communicate through it.",
   ],
 };
 
 export const problemStatements = [
   {
     title: "The real problem to solve",
-    body: "Passengers do not experience Piraeus as a terminal. They experience it as part of a journey from airport, hotel, rail, coach, taxi or city centre through terminal access, check-in, boarding, disembarkation and onward transport.",
+    body: "Passengers do not experience Piraeus as a terminal. They experience it as part of a journey from Athens International Airport, a nearby hotel, road or rail into terminal access, baggage drop, check-in, embarkation, disembarkation and onward travel.",
   },
   {
-    title: "Passengers need clarity",
-    body: "Today, passengers do not lack signage. They lack clarity on what to do next when a vessel changes terminal, boarding is delayed, entrance congestion builds, weather affects operations or onward transport is uncertain.",
+    title: "The questions are operational",
+    body: "They need to know whether their vessel has changed terminal, whether boarding is delayed, whether the entrance is congested, whether to proceed or wait, where onward transport is, and what happens if there is disruption.",
   },
   {
     title: "Static signage cannot keep up",
-    body: "When operations run as planned, static information is enough. But schedules shift, traffic builds and disruption happens. In those moments, information becomes operational.",
+    body: "When operations run as planned, static information is enough. But vessel schedules shift, boarding times move, traffic builds and weather impacts operations. In those moments, information becomes operational.",
   },
 ];
 
@@ -160,6 +160,11 @@ export const missingLayer = [
     icon: "route",
   },
   {
+    title: "Baggage status",
+    body: "Baggage drop, reclaim readiness and release timing that affect passenger movement.",
+    icon: "baggage",
+  },
+  {
     title: "Intermodal transport",
     body: "Airport, rail, coach, taxi and city access signals that affect the journey.",
     icon: "network",
@@ -169,22 +174,56 @@ export const missingLayer = [
 export const signageFit = [
   {
     title: "The signage contractor",
-    body: "Delivers screens, cabling, mounting, installation and local support.",
+    body: "Delivers the physical estate: screens, cabling, player infrastructure, installation and local support.",
   },
   {
     title: "The CMS",
-    body: "Publishes approved content and controls the screen estate.",
+    body: "Enables publishing and control across the approved screen estate.",
   },
   {
     title: "SmartSEA",
-    body: "Connects data sources, defines journey logic and feeds passenger-ready instructions into any capable CMS.",
+    body: "Enables intelligence and integration by connecting data sources, defining passenger information services and feeding the CMS with the right messages.",
   },
 ];
+
+export const smartseaRole = {
+  kicker: "The SmartSEA role",
+  title: "The data, logic and integration behind the signage environment.",
+  subtitle:
+    "SmartSEA is not positioned as a hardware or installation provider. Its role is to define and enable the passenger information layer behind the signage environment.",
+  capabilities: [
+    {
+      title: "Intermodal APIs",
+      body: "Design and develop controlled services that turn maritime, terminal and transport data into usable passenger information.",
+      icon: "api",
+    },
+    {
+      title: "Connected operations",
+      body: "Connect maritime, terminal, baggage and transport signals so the same operational change can guide every touchpoint.",
+      icon: "network",
+    },
+    {
+      title: "Journey logic",
+      body: "Structure passenger groups, zones, priorities and next actions so messages reflect the situation, not only the location.",
+      icon: "waypoints",
+    },
+    {
+      title: "Passenger-ready output",
+      body: "Translate operational inputs into clear, timely, context-aware guidance for CMS channels, staff tools and future services.",
+      icon: "monitor",
+    },
+  ],
+} satisfies {
+  kicker: string;
+  title: string;
+  subtitle: string;
+  capabilities: Array<{ title: string; body: string; icon: IconKey }>;
+};
 
 export const practicalPath = [
   {
     title: "Identify priority situations",
-    body: "Find where passengers experience the most uncertainty and staff carry the highest communication burden.",
+    body: "Find where passengers experience the most uncertainty and where staff face the highest communication burden.",
   },
   {
     title: "Map available data",
@@ -201,6 +240,21 @@ export const practicalPath = [
   {
     title: "Expand progressively",
     body: "Extend to additional journeys, channels and services toward a connected passenger platform.",
+  },
+];
+
+export const engagementFocus = [
+  {
+    title: "Identify priority use cases",
+    body: "Select the moments where better information would immediately reduce passenger uncertainty.",
+  },
+  {
+    title: "Review available data sources",
+    body: "Confirm the maritime, terminal, baggage and transport signals that can support the first services.",
+  },
+  {
+    title: "Define first services to activate",
+    body: "Move from infrastructure to value through a small number of controlled data services connected to the signage environment.",
   },
 ];
 

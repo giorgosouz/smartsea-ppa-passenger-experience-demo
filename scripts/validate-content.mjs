@@ -43,6 +43,12 @@ const requiredPillars = [
   "CMS and screens are channels",
   "Connection risk",
   "Recovery action",
+  "From static directions to dynamic, operational guidance",
+  "The CMS publishes the message",
+  "The data layer defines the message",
+  "The SmartSEA role",
+  "Invitation to engage",
+  "Baggage status",
 ];
 
 for (const pillar of requiredPillars) {
@@ -80,6 +86,8 @@ const forbiddenInAppCopy = [
   /cabling contractor/i,
   /Focused strategic proposal/i,
   /value-layer proposal/i,
+  /TravelWise/i,
+  /ongoing collaboration/i,
 ];
 
 for (const pattern of forbiddenInAppCopy) {

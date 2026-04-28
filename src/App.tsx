@@ -22,10 +22,12 @@ import {
 import { useEffect, useState } from "react";
 import {
   apiStories,
+  engagementFocus,
   missingLayer,
   practicalPath,
   problemStatements,
   signageFit,
+  smartseaRole,
   spinetixTransportCases,
   supportingReferenceAssets,
   visionIntro,
@@ -152,20 +154,6 @@ function ReferencePage() {
         />
       </section>
 
-      <section className="proposal-card-row" aria-label="Control React Extend">
-        {visionPillars.map((pillar, index) => {
-          const Icon = icons[pillar.icon];
-          return (
-            <article className={`proposal-card tone-${index}`} key={pillar.title}>
-              <Icon size={28} />
-              <h3>{pillar.title}</h3>
-              <p>{pillar.body}</p>
-              <strong>{pillar.proof}</strong>
-            </article>
-          );
-        })}
-      </section>
-
       <section className="dark-statement">
         <div className="vertical-title">
           <span>The strategic imperative:</span>
@@ -179,8 +167,7 @@ function ReferencePage() {
             </article>
           ))}
           <strong className="statement-punch">
-            The refresh should not create another static estate. It should create a passenger
-            information system that PPA can govern, monitor and extend over time.
+            Today, passengers do not lack signage. They lack clarity on what to do next.
           </strong>
         </div>
       </section>
@@ -209,6 +196,20 @@ function ReferencePage() {
         <InformationFlow />
       </section>
 
+      <section className="proposal-card-row" aria-label="Control React Extend">
+        {visionPillars.map((pillar, index) => {
+          const Icon = icons[pillar.icon];
+          return (
+            <article className={`proposal-card tone-${index}`} key={pillar.title}>
+              <Icon size={28} />
+              <h3>{pillar.title}</h3>
+              <p>{pillar.body}</p>
+              <strong>{pillar.proof}</strong>
+            </article>
+          );
+        })}
+      </section>
+
       <section className="proposal-section fit-section">
         <div className="proposal-copy">
           <p className="section-marker">How this fits with the signage program</p>
@@ -227,6 +228,8 @@ function ReferencePage() {
           ))}
         </div>
       </section>
+
+      <SmartSeaRoleSection />
 
       <section className="proposal-section roadmap-section">
         <div className="proposal-copy">
@@ -248,6 +251,8 @@ function ReferencePage() {
         </div>
       </section>
 
+      <EngagementSection />
+
       <ReferenceSection />
 
       <section className="closing-band">
@@ -255,8 +260,11 @@ function ReferencePage() {
           src="assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
           alt="SmartSEA powered by SITA"
         />
-        <p>The tender can upgrade screens and CMS.</p>
-        <h2>SmartSEA upgrades what passengers are told when the plan changes.</h2>
+        <p>The signage refresh creates the right foundation.</p>
+        <h2>
+          Now activate the first capabilities that make it responsive, connected and useful
+          from day one.
+        </h2>
         <a className="button button-on-dark" href="#/demo">
           See practical demo <ArrowRight size={18} />
         </a>
@@ -281,11 +289,11 @@ function DemoPage() {
     <>
       <section className="demo-hero">
         <div className="demo-hero-copy">
-          <p className="section-marker">Practical passenger screen demo</p>
-          <h1>Show the next right move, everywhere it matters.</h1>
+          <p className="section-marker">What this enables</p>
+          <h1>From static directions to dynamic, operational guidance.</h1>
           <p className="lede">
-            Pick a disruption and watch SmartSEA turn it into practical guidance for the
-            screens passengers and staff actually use.
+            Pick a changing operation and watch SmartSEA translate it into clear, timely,
+            context-aware guidance for the screens passengers and staff actually use.
           </p>
         </div>
         <div className={`scenario-summary severity-${selectedStory.severity}`}>
@@ -483,8 +491,8 @@ function PassengerDisplayMockup({
           </section>
 
           <footer className="display-strip" aria-label="Screen publishing state">
-            <span>SmartSEA passenger information layer</span>
-            <strong>CMS channel ready</strong>
+            <span>The CMS publishes the message</span>
+            <strong>The data layer defines the message</strong>
           </footer>
         </div>
       </div>
@@ -497,19 +505,77 @@ function InformationFlow() {
     <div className="information-flow" aria-label="Passenger information layer flow">
       <article>
         <h3>Operational inputs</h3>
-        <p>vessel schedules, terminal activity, baggage status, transport data</p>
+        <p>maritime operations, terminal activity, passenger flow, baggage status, transport data</p>
       </article>
       <ArrowRight size={24} />
       <article className="flow-dark">
-        <h3>SmartSEA journey logic</h3>
-        <p>priority, context, passenger group, next action</p>
+        <h3>SmartSEA data layer</h3>
+        <p>priority, context, passenger group, journey logic and next action</p>
       </article>
       <ArrowRight size={24} />
       <article className="flow-accent">
-        <h3>CMS channels</h3>
-        <p>screens, staff tools, mobile handoff, audio</p>
+        <h3>Passenger guidance</h3>
+        <p>clear, timely, context-aware instructions through CMS channels</p>
       </article>
     </div>
+  );
+}
+
+function SmartSeaRoleSection() {
+  return (
+    <section className="proposal-section role-definition-section">
+      <div className="proposal-copy">
+        <p className="section-marker">{smartseaRole.kicker}</p>
+        <h2>{smartseaRole.title}</h2>
+        <p className="proposal-lede">{smartseaRole.subtitle}</p>
+      </div>
+      <div className="smartsea-capability-grid">
+        {smartseaRole.capabilities.map((capability) => {
+          const Icon = icons[capability.icon];
+          return (
+            <article className="capability-card" key={capability.title}>
+              <Icon size={24} />
+              <h3>{capability.title}</h3>
+              <p>{capability.body}</p>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function EngagementSection() {
+  return (
+    <section className="proposal-section engagement-section">
+      <div className="proposal-copy">
+        <p className="section-marker">Invitation to engage</p>
+        <h2>Move quickly from infrastructure to value.</h2>
+        <p className="proposal-lede">
+          A focused working session with PPA IT and Cruise Terminal Operations can define the
+          first passenger information services to activate through controlled data services.
+        </p>
+      </div>
+      <div className="engagement-panel">
+        <div>
+          <span>Working session focus</span>
+          <h3>This is not about launching a large program.</h3>
+          <p>
+            It is about activating the first capabilities that make the signage environment
+            more responsive, more connected and more useful from day one.
+          </p>
+        </div>
+        <div className="engagement-focus-list">
+          {engagementFocus.map((item, index) => (
+            <article key={item.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -541,7 +607,7 @@ function ApiSignalsPanel({ story }: { story: ApiStory }) {
     <section className="signals-panel" aria-label="API signals used">
       <div className="panel-heading">
         <p className="section-marker">Signals behind the screen</p>
-        <h2>The instruction is practical because the data is connected.</h2>
+        <h2>The instruction is practical because the information layer is connected.</h2>
       </div>
       <div className="signal-grid">
         {story.signals.map((signal) => (

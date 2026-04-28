@@ -14,7 +14,13 @@ remain local and ignored by git. Do not commit
 `SUPPORTING_SOURCE_MATERIAL_ORIGINALS/`, proposal drafts, or copied raw
 extracts.
 
-For the April 2026 visual restyle, `PPA_Vision_draft_new.docx` is treated as
-the sanitized narrative source and `PPA_revised_draft.pdf` is treated as visual
-direction only. Do not copy CEO notes, contact details, proposal footers, or
-PDF-only positioning into the app.
+As of 2026-04-28, `C:\Users\George.Ouzounidis\Downloads\PPA Beyond Digital
+Signage - SmartSea proposal.pdf` is the current narrative baseline for the
+demo. Use its public-facing structure: shift, real passenger problem, missing
+layer, Control / React / Extend, fit with the signage program, SmartSEA role,
+practical path, and invitation to engage.
+
+Do not copy CEO notes, contact details, proposal footers, source excerpts,
+TravelWise/prior-collaboration claims, or raw PDF text into the app. Keep the
+references use case and tracked reference assets unchanged unless the user asks
+for a reference update explicitly.

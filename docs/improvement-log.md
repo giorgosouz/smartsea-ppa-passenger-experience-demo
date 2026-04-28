@@ -54,3 +54,15 @@ Success proxy:
 
 Evidence:
 - `npm run validate` should pass after the revised visual restyle and fail if those narrative pillars or safety guards regress.
+
+Hypothesis: switching the baseline to the final "Beyond Digital Signage" proposal could drift the app away from the proposal's section logic or accidentally import its prior-collaboration line.
+
+Improvement: updated the content validator and source notes to require the final proposal anchors while blocking TravelWise/ongoing-collaboration claims.
+
+Success proxy:
+- app copy must keep the proposal anchors for dynamic operational guidance, CMS/data-layer roles, SmartSEA role, invitation to engage, and baggage status,
+- app copy must not include TravelWise or ongoing-collaboration positioning,
+- the reference use case remains explicitly protected in source notes.
+
+Evidence:
+- `npm run validate` should pass after the final-proposal narrative update and fail if those anchors or safety guards regress.
