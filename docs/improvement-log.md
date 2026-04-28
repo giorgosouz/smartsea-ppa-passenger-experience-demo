@@ -66,3 +66,39 @@ Success proxy:
 
 Evidence:
 - `npm run validate` should pass after the final-proposal narrative update and fail if those anchors or safety guards regress.
+
+Hypothesis: after sharpening the demo around the USP, future edits could drift back to generic signage/CMS value instead of SmartSEA decision intelligence.
+
+Improvement: updated the app copy and validator to require the decision-layer USP, including the "Not digital signage" hero, "Any vendor can display signs" framing, intermodal proof, MCT/recovery, and baggage-processing anchors.
+
+Success proxy:
+- app copy must present SmartSEA as the passenger decision layer,
+- demo screens must keep intermodal, MCT/recovery, and baggage-processing proof as evidence of that layer,
+- validation fails if the new USP anchors are removed.
+
+Evidence:
+- `npm run validate`, `npm run build`, and desktop/mobile browser checks should pass after the USP rewrite.
+
+Hypothesis: even with the USP fixed, screen examples can still feel generic if they use broad airport/port labels instead of PPA operating language.
+
+Improvement: rewrote the demo screen scenarios around PPA cruise operations and added validation anchors for PPA Mobility Desk, transfer bay, baggage hall, and PPA screen publishing.
+
+Success proxy:
+- passenger displays read as Piraeus/PPA cruise-operation screens,
+- intermodal proof still includes ATH, Piraeus rail, vessel, baggage, and PPA terminal readiness,
+- validation fails if the PPA screen anchors disappear.
+
+Evidence:
+- `npm run validate`, `npm run build`, and desktop/mobile browser checks should pass after the PPA screen-tailoring update.
+
+Hypothesis: PPA-specific text is not enough if every mock screen uses the same visual template.
+
+Improvement: added screen format variants for advisory, terminal, transfer, baggage, rail, handoff, staff, and mobile views, with distinct panels and styling.
+
+Success proxy:
+- the screen wall shows visibly different touchpoint formats,
+- validation fails if the variant rendering or key format assignments disappear,
+- desktop/mobile checks confirm the larger variant layouts still fit.
+
+Evidence:
+- `npm run validate`, `npm run build`, and desktop/mobile browser checks should pass after the screen-format update.

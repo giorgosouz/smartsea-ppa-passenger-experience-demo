@@ -30,6 +30,7 @@ import {
   smartseaRole,
   spinetixTransportCases,
   supportingReferenceAssets,
+  uspHierarchy,
   visionIntro,
   visionPillars,
   type ApiStory,
@@ -121,9 +122,9 @@ function ReferencePage() {
         </div>
         <div className="cover-panel">
           <span>SmartSEA</span>
-          <h1>Piraeus Port Authority</h1>
-          <p>Cruise terminal passenger information layer</p>
-          <strong>From screen replacement to governed passenger guidance</strong>
+          <h1>Passenger decision intelligence</h1>
+          <p>For Piraeus Port Authority cruise operations</p>
+          <strong>Screens publish the message. SmartSEA decides the right message.</strong>
         </div>
       </section>
 
@@ -147,7 +148,7 @@ function ReferencePage() {
             instruction: "Airport-bound passengers are guided to the right recovery point before they leave the terminal.",
             status: "Live guidance",
             time: "Mar 2026",
-            title: "Passenger information layer active",
+            title: "Airport connection at risk",
             zone: "Terminal A",
           }}
           storyStatus="Live"
@@ -168,6 +169,7 @@ function ReferencePage() {
           ))}
           <strong className="statement-punch">
             Today, passengers do not lack signage. They lack clarity on what to do next.
+            Any vendor can display signs; SmartSEA decides the next passenger instruction.
           </strong>
         </div>
       </section>
@@ -175,10 +177,10 @@ function ReferencePage() {
       <section className="proposal-section layer-section">
         <div className="proposal-copy">
           <p className="section-marker">The missing layer</p>
-          <h2>From content to intelligence</h2>
+          <h2>Signals that let SmartSEA decide</h2>
           <p className="proposal-lede">
             Traditional signage answers location questions. A connected passenger information
-            layer answers journey questions.
+            layer decides what each passenger group should do next.
           </p>
         </div>
         <div className="layer-grid">
@@ -213,10 +215,10 @@ function ReferencePage() {
       <section className="proposal-section fit-section">
         <div className="proposal-copy">
           <p className="section-marker">How this fits with the signage program</p>
-          <h2>Each layer has a clear role.</h2>
+          <h2>Screens publish. SmartSEA decides.</h2>
           <p className="proposal-lede">
-            The current signage program can continue to procure and deploy the physical estate.
-            SmartSEA sits above it as the data, journey logic and integration layer.
+            The current signage program can procure and deploy the physical estate. SmartSEA
+            sits above it as the real-time data, journey logic and decision layer.
           </p>
         </div>
         <div className="role-columns">
@@ -260,10 +262,10 @@ function ReferencePage() {
           src="assets/brand/smartsea-logo-horizontal-powered-by-sita-white.svg"
           alt="SmartSEA powered by SITA"
         />
-        <p>The signage refresh creates the right foundation.</p>
+        <p>The signage refresh creates the right channels.</p>
         <h2>
-          Now activate the first capabilities that make it responsive, connected and useful
-          from day one.
+          Now activate the decision layer that makes those channels responsive, connected and
+          useful from day one.
         </h2>
         <a className="button button-on-dark" href="#/demo">
           See practical demo <ArrowRight size={18} />
@@ -289,11 +291,12 @@ function DemoPage() {
     <>
       <section className="demo-hero">
         <div className="demo-hero-copy">
-          <p className="section-marker">What this enables</p>
-          <h1>From static directions to dynamic, operational guidance.</h1>
+          <p className="section-marker">SmartSEA USP</p>
+          <h1>Not digital signage. Passenger decision intelligence.</h1>
           <p className="lede">
-            Pick a changing operation and watch SmartSEA translate it into clear, timely,
-            context-aware guidance for the screens passengers and staff actually use.
+            Any vendor can display signs. Pick a changing operation and watch SmartSEA decide
+            the next correct passenger instruction, then publish it through the screens
+            passengers and staff actually use.
           </p>
         </div>
         <div className={`scenario-summary severity-${selectedStory.severity}`}>
@@ -305,6 +308,8 @@ function DemoPage() {
           <p>{selectedStory.operatorNote}</p>
         </div>
       </section>
+
+      <UspHierarchySection />
 
       <section className="demo-workbench practical-workbench">
         <div className="scenario-rail" aria-label="Journey scenarios">
@@ -342,6 +347,23 @@ function DemoPage() {
   );
 }
 
+function UspHierarchySection() {
+  return (
+    <section className="usp-strip" aria-label="SmartSEA USP hierarchy">
+      {uspHierarchy.map((item) => {
+        const Icon = icons[item.icon];
+        return (
+          <article key={item.title}>
+            <Icon size={22} />
+            <h2>{item.title}</h2>
+            <p>{item.body}</p>
+          </article>
+        );
+      })}
+    </section>
+  );
+}
+
 function ScreenStage({
   selectedIndex,
   selectedScreen,
@@ -368,7 +390,7 @@ function ScreenStage({
       </div>
       <aside className="stage-sidebar" aria-label="Publishing controls">
         <div className="stage-status">
-          <span>Message being published</span>
+          <span>Decision being published</span>
           <h2>{selectedScreen.title}</h2>
           <p>{selectedScreen.instruction}</p>
           <div className="stage-action">
@@ -377,7 +399,7 @@ function ScreenStage({
           </div>
         </div>
         <div className="stage-publish-card">
-          <span>{story.status}</span>
+          <span>Why this is SmartSEA</span>
           <strong>{story.headline}</strong>
           <p>{story.operatorNote}</p>
         </div>
@@ -423,7 +445,7 @@ function PassengerScreenWall({ story }: { story: ApiStory }) {
     <section className="screen-wall" aria-label="Passenger-facing screen examples">
       <div className="panel-heading screen-wall-heading">
         <p className="section-marker">Screen network</p>
-        <h2>Same decision, adapted to every passenger touchpoint.</h2>
+        <h2>Same SmartSEA decision, adapted to every passenger touchpoint.</h2>
       </div>
       <div className="practical-screens-grid">
         {story.screens.map((screen) => (
@@ -452,14 +474,15 @@ function PassengerDisplayMockup({
   storyStatus: string;
 }) {
   const Icon = icons[screen.icon];
+  const format = screen.format ?? "terminal";
 
   return (
-    <article className={`passenger-display ${compact ? "compact" : ""}`}>
+    <article className={`passenger-display format-${format} ${compact ? "compact" : ""}`}>
       <div className="display-bezel">
         <div className="display-face">
           <header className="display-header">
             <div className="display-brand">
-              <span>PPA Cruise Terminal Live</span>
+              <span>PPA Cruise Operations Live</span>
               <strong>{label}</strong>
             </div>
             <div className="display-meta">
@@ -479,6 +502,8 @@ function PassengerDisplayMockup({
             </div>
           </section>
 
+          <ScreenFormatPanel screen={screen} />
+
           <section className="display-instruction">
             <div>
               <span>Next action</span>
@@ -491,12 +516,168 @@ function PassengerDisplayMockup({
           </section>
 
           <footer className="display-strip" aria-label="Screen publishing state">
-            <span>The CMS publishes the message</span>
-            <strong>The data layer defines the message</strong>
+            <span>PPA screens publish the message</span>
+            <strong>SmartSEA decides the right instruction</strong>
           </footer>
         </div>
       </div>
     </article>
+  );
+}
+
+function ScreenFormatPanel({ screen }: { screen: PassengerScreenMessage }) {
+  const format = screen.format ?? "terminal";
+
+  if (format === "advisory") {
+    return (
+      <section className="format-panel advisory-panel" aria-label="Advisory screen format">
+        <div>
+          <span>Passenger group</span>
+          <strong>PPA cruise group</strong>
+        </div>
+        <div>
+          <span>Trigger</span>
+          <strong>{screen.context}</strong>
+        </div>
+        <div>
+          <span>Call to watch</span>
+          <strong>{screen.action}</strong>
+        </div>
+      </section>
+    );
+  }
+
+  if (format === "transfer") {
+    return (
+      <section className="format-panel transfer-panel" aria-label="Transfer bay screen format">
+        <div>
+          <span>Terminal</span>
+          <strong>PPA</strong>
+        </div>
+        <ArrowRight size={20} />
+        <div>
+          <span>Assigned route</span>
+          <strong>{screen.action}</strong>
+        </div>
+        <ArrowRight size={20} />
+        <div>
+          <span>Transfer state</span>
+          <strong>{screen.status}</strong>
+        </div>
+      </section>
+    );
+  }
+
+  if (format === "baggage") {
+    return (
+      <section className="format-panel baggage-panel" aria-label="Baggage screen format">
+        <div>
+          <span>Baggage flow</span>
+          <strong>{screen.status}</strong>
+        </div>
+        <div>
+          <span>Passenger movement</span>
+          <strong>{screen.action}</strong>
+        </div>
+        <div>
+          <span>Queue control</span>
+          <strong>Hold until release</strong>
+        </div>
+      </section>
+    );
+  }
+
+  if (format === "rail") {
+    return (
+      <section className="format-panel rail-panel" aria-label="Rail platform screen format">
+        <div>
+          <span>Service</span>
+          <strong>M3 Piraeus</strong>
+        </div>
+        <div>
+          <span>Boarding advice</span>
+          <strong>{screen.action}</strong>
+        </div>
+        <div>
+          <span>Risk state</span>
+          <strong>{screen.status}</strong>
+        </div>
+      </section>
+    );
+  }
+
+  if (format === "handoff") {
+    return (
+      <section className="format-panel handoff-panel" aria-label="Assisted handoff screen format">
+        <div>
+          <span>Handoff point</span>
+          <strong>{screen.zone}</strong>
+        </div>
+        <div>
+          <span>Assistance state</span>
+          <strong>{screen.status}</strong>
+        </div>
+        <div>
+          <span>Passenger action</span>
+          <strong>{screen.action}</strong>
+        </div>
+      </section>
+    );
+  }
+
+  if (format === "staff") {
+    return (
+      <section className="format-panel staff-panel" aria-label="Staff action screen format">
+        <div>
+          <span>Owner</span>
+          <strong>PPA Mobility Desk</strong>
+        </div>
+        <div>
+          <span>Action status</span>
+          <strong>{screen.status}</strong>
+        </div>
+        <div>
+          <span>Next task</span>
+          <strong>{screen.action}</strong>
+        </div>
+      </section>
+    );
+  }
+
+  if (format === "mobile") {
+    return (
+      <section className="format-panel mobile-panel" aria-label="Mobile handoff screen format">
+        <div>
+          <span>Passenger handoff</span>
+          <strong>Keep open</strong>
+        </div>
+        <div>
+          <span>Update state</span>
+          <strong>{screen.status}</strong>
+        </div>
+        <div>
+          <span>Next update</span>
+          <strong>{screen.time}</strong>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="format-panel terminal-panel" aria-label="Terminal decision screen format">
+      <div>
+        <span>Terminal zone</span>
+        <strong>{screen.zone}</strong>
+      </div>
+      <div>
+        <span>Decision state</span>
+        <strong>{screen.status}</strong>
+      </div>
+      <div>
+        <span>PPA action</span>
+        <strong>{screen.action}</strong>
+      </div>
+    </section>
   );
 }
 
@@ -509,13 +690,13 @@ function InformationFlow() {
       </article>
       <ArrowRight size={24} />
       <article className="flow-dark">
-        <h3>SmartSEA data layer</h3>
-        <p>priority, context, passenger group, journey logic and next action</p>
+        <h3>SmartSEA decision layer</h3>
+        <p>what, where, when, passenger group, journey logic and next action</p>
       </article>
       <ArrowRight size={24} />
       <article className="flow-accent">
-        <h3>Passenger guidance</h3>
-        <p>clear, timely, context-aware instructions through CMS channels</p>
+        <h3>Passenger instruction</h3>
+        <p>the next correct action through CMS channels, staff tools and future services</p>
       </article>
     </div>
   );
@@ -589,7 +770,7 @@ function ApiInstructionPanel({ story }: { story: ApiStory }) {
       <h2>{story.instruction.title}</h2>
       <p>{story.instruction.body}</p>
       <div className="next-action api-next-action">
-        <span>Recovery action</span>
+        <span>Operator action</span>
         <strong>{story.instruction.action}</strong>
       </div>
       <div className="snapshot-grid" aria-label="Curated API snapshot metrics">
@@ -607,7 +788,7 @@ function ApiSignalsPanel({ story }: { story: ApiStory }) {
     <section className="signals-panel" aria-label="API signals used">
       <div className="panel-heading">
         <p className="section-marker">Signals behind the screen</p>
-        <h2>The instruction is practical because the information layer is connected.</h2>
+        <h2>What a signage CMS cannot decide by itself.</h2>
       </div>
       <div className="signal-grid">
         {story.signals.map((signal) => (
@@ -628,7 +809,7 @@ function JourneyTimeline({ story }: { story: ApiStory }) {
     <section className="journey-timeline" aria-label="Intermodal journey timeline">
       <div className="panel-heading">
         <p className="section-marker">Operational chain</p>
-        <h2>What changed behind the passenger message.</h2>
+        <h2>Intermodal proof behind the passenger instruction.</h2>
       </div>
       <div className="timeline-list">
         {story.steps.map((step) => (
@@ -654,10 +835,10 @@ function ReferenceSection() {
     <section className="proposal-section references-band">
       <div className="proposal-copy">
         <p className="section-marker">References</p>
-        <h2>Reference material remains the channel proof.</h2>
+        <h2>Reference material proves channels, not the USP.</h2>
         <p className="proposal-lede">
           These transport references are preserved as supporting material. The sales argument
-          separates screen-network credibility from the SmartSEA passenger information layer.
+          separates screen-network credibility from the SmartSEA passenger decision layer.
         </p>
       </div>
       <div className="reference-columns">

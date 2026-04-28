@@ -134,6 +134,7 @@ img {
 .dark-statement,
 .closing-band,
 .demo-hero,
+.usp-strip,
 .demo-workbench {
   margin: 0 auto;
   max-width: 1500px;
@@ -181,6 +182,7 @@ img {
 .display-brand span,
 .display-meta,
 .display-message span,
+.format-panel span,
 .display-instruction span,
 .display-strip,
 .stage-display-topline span,
@@ -694,6 +696,7 @@ img {
 
 .display-header,
 .display-main,
+.format-panel,
 .display-instruction,
 .display-strip {
   position: relative;
@@ -814,6 +817,128 @@ img {
   max-width: 780px;
 }
 
+.format-panel {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.format-panel div {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-small);
+  min-width: 0;
+  padding: 14px;
+}
+
+.format-panel span {
+  color: rgba(255, 255, 255, 0.58);
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.format-panel strong {
+  color: #ffffff;
+  display: block;
+  font-size: 1rem;
+  line-height: 1.18;
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+}
+
+.transfer-panel {
+  align-items: stretch;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.2fr) auto minmax(0, 1fr);
+}
+
+.transfer-panel svg {
+  align-self: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.baggage-panel div,
+.rail-panel div,
+.handoff-panel div,
+.staff-panel div,
+.mobile-panel div,
+.terminal-panel div {
+  min-height: 82px;
+}
+
+.format-advisory .display-face {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 36%),
+    #061226;
+}
+
+.format-terminal .display-face {
+  background:
+    linear-gradient(180deg, rgba(255, 150, 56, 0.12), transparent 42%),
+    #030523;
+}
+
+.format-transfer .display-face {
+  background:
+    linear-gradient(180deg, rgba(22, 134, 75, 0.18), transparent 42%),
+    #041d22;
+}
+
+.format-baggage .display-face {
+  background:
+    linear-gradient(180deg, rgba(255, 150, 56, 0.12), transparent 38%),
+    #102015;
+}
+
+.format-rail .display-face {
+  background:
+    linear-gradient(180deg, rgba(84, 132, 224, 0.18), transparent 42%),
+    #06152b;
+}
+
+.format-handoff .display-face,
+.format-staff .display-face {
+  background:
+    linear-gradient(180deg, rgba(217, 61, 137, 0.16), transparent 42%),
+    #120720;
+}
+
+.format-mobile .display-bezel {
+  border-radius: 34px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 430px;
+}
+
+.format-mobile .display-face {
+  border-radius: 24px;
+  min-height: 640px;
+}
+
+.format-transfer .display-icon,
+.format-transfer .display-instruction div:first-child {
+  background: linear-gradient(180deg, #19a463, #0b6f76);
+}
+
+.format-baggage .display-icon,
+.format-baggage .display-instruction div:first-child {
+  background: linear-gradient(180deg, #ff9638, #16864b);
+}
+
+.format-rail .display-icon,
+.format-rail .display-instruction div:first-child {
+  background: linear-gradient(180deg, #3b75d4, #383a62);
+}
+
+.format-handoff .display-icon,
+.format-staff .display-icon,
+.format-mobile .display-icon,
+.format-handoff .display-instruction div:first-child,
+.format-staff .display-instruction div:first-child,
+.format-mobile .display-instruction div:first-child {
+  background: linear-gradient(180deg, #d93d89, #383a62);
+}
+
 .display-instruction {
   display: grid;
   gap: 14px;
@@ -908,6 +1033,28 @@ img {
   line-height: 1.34;
 }
 
+.passenger-display.compact .format-panel {
+  gap: 8px;
+  grid-template-columns: 1fr;
+}
+
+.passenger-display.compact .format-panel div {
+  min-height: auto;
+  padding: 10px;
+}
+
+.passenger-display.compact .format-panel span {
+  font-size: 0.62rem;
+}
+
+.passenger-display.compact .format-panel strong {
+  font-size: 0.86rem;
+}
+
+.passenger-display.compact .format-panel svg {
+  display: none;
+}
+
 .passenger-display.compact .display-instruction {
   grid-template-columns: 1fr;
 }
@@ -978,6 +1125,49 @@ img {
 
 .demo-hero-copy h1 {
   max-width: 880px;
+}
+
+.usp-strip {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-bottom: 34px;
+}
+
+.usp-strip article {
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow);
+  min-height: 210px;
+  padding: 24px;
+}
+
+.usp-strip article:first-child {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #ffffff;
+}
+
+.usp-strip svg {
+  color: var(--orange);
+}
+
+.usp-strip h2 {
+  color: inherit;
+  font-size: 1.2rem;
+  line-height: 1.12;
+  margin: 24px 0 0;
+}
+
+.usp-strip p {
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin: 14px 0 0;
+}
+
+.usp-strip article:first-child p {
+  color: rgba(255, 255, 255, 0.74);
 }
 
 .scenario-summary {
@@ -1605,6 +1795,7 @@ img {
   .dark-statement,
   .closing-band,
   .demo-hero,
+  .usp-strip,
   .demo-workbench {
     padding-left: 28px;
     padding-right: 28px;
@@ -1628,7 +1819,8 @@ img {
   .proposal-card-row,
   .role-columns,
   .roadmap,
-  .smartsea-capability-grid {
+  .smartsea-capability-grid,
+  .usp-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1676,6 +1868,7 @@ img {
   .dark-statement,
   .closing-band,
   .demo-hero,
+  .usp-strip,
   .demo-workbench {
     padding-left: 20px;
     padding-right: 20px;
@@ -1716,6 +1909,7 @@ img {
   .role-columns,
   .roadmap,
   .smartsea-capability-grid,
+  .usp-strip,
   .practical-demo-grid,
   .outcome-strip,
   .practical-screens-grid,
