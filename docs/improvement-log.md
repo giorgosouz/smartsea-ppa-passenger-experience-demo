@@ -39,3 +39,18 @@ Success proxy:
 
 Evidence:
 - `npm run validate` should pass for the API-first demo and fail if the required API-layer positioning is removed.
+
+## 2026-04-28
+
+Hypothesis: using a revised proposal PDF for visual direction could accidentally overwrite the first Word draft's passenger-information narrative or copy proposal-template material into the app.
+
+Improvement: updated `npm run validate` to require the first-draft narrative pillars and reject CEO/contact/proposal-template phrases from app copy.
+
+Success proxy:
+- app copy keeps "from screens to passenger information",
+- app copy keeps Control / React / Extend,
+- app copy keeps CMS and screens as channels,
+- app copy blocks revised-PDF-only CEO, contact, and installation-bid phrasing.
+
+Evidence:
+- `npm run validate` should pass after the revised visual restyle and fail if those narrative pillars or safety guards regress.

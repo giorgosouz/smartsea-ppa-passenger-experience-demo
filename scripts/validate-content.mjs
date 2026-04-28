@@ -34,7 +34,12 @@ const appCopy = readFiles(
 
 const requiredPillars = [
   "SmartSEA Intermodal APIs",
-  "The product is the API layer",
+  "From screens to passenger information",
+  "passenger information layer",
+  "The value is not the screen",
+  "Control",
+  "React",
+  "Extend",
   "CMS and screens are channels",
   "Connection risk",
   "Recovery action",
@@ -64,6 +69,17 @@ const forbiddenInAppCopy = [
   /payload-panel/i,
   /payload-header/i,
   /feed-chips/i,
+  /A word from our CEO/i,
+  /Chief Executive Officer/i,
+  /Kris Vedat/i,
+  /Registered Office/i,
+  /Correspondence Address/i,
+  /INFO@SMART-SEA\.COM/i,
+  /complete installation bid/i,
+  /full-scope compliant tender offer/i,
+  /cabling contractor/i,
+  /Focused strategic proposal/i,
+  /value-layer proposal/i,
 ];
 
 for (const pattern of forbiddenInAppCopy) {

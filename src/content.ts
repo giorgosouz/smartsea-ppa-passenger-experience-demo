@@ -95,6 +95,115 @@ export type ReferenceAsset = {
   source: string;
 };
 
+export const visionIntro = {
+  kicker: "SmartSEA passenger information layer",
+  title: "From screens to passenger information",
+  subtitle:
+    "The signage refresh at Piraeus Cruise Terminal restores display reliability. The bigger opportunity is to turn that estate into a governed passenger information layer.",
+  body: [
+    "Across transport hubs, signage is evolving from static display into an operational system: real-time communication, disruption management, and guidance that connects passengers to their next step.",
+    "SmartSEA is not positioned as the installation layer. It shows how the physical refresh can become the foundation for central publishing, zone-based content control, priority messaging, and live operational data.",
+    "The value is not the screen. The value is what PPA can control, automate and communicate through it.",
+  ],
+};
+
+export const problemStatements = [
+  {
+    title: "The real problem to solve",
+    body: "Passengers do not experience Piraeus as a terminal. They experience it as part of a journey from airport, hotel, rail, coach, taxi or city centre through terminal access, check-in, boarding, disembarkation and onward transport.",
+  },
+  {
+    title: "Passengers need clarity",
+    body: "Today, passengers do not lack signage. They lack clarity on what to do next when a vessel changes terminal, boarding is delayed, entrance congestion builds, weather affects operations or onward transport is uncertain.",
+  },
+  {
+    title: "Static signage cannot keep up",
+    body: "When operations run as planned, static information is enough. But schedules shift, traffic builds and disruption happens. In those moments, information becomes operational.",
+  },
+];
+
+export const visionPillars = [
+  {
+    title: "Control",
+    body: "PPA defines what is communicated, where, and by whom. Messages stay consistent across terminals, zones and touchpoints.",
+    proof: "Structured content, governed publishing and estate visibility",
+    icon: "shield",
+  },
+  {
+    title: "React",
+    body: "Information adapts to real-time conditions. Delays, congestion, boarding changes and disruptions trigger immediate updates.",
+    proof: "Priority messaging from operational signals",
+    icon: "radar",
+  },
+  {
+    title: "Extend",
+    body: "Information is no longer limited to the terminal. The same foundation can guide passengers across the full journey and future channels.",
+    proof: "From arrival in Athens to onward travel",
+    icon: "waypoints",
+  },
+] satisfies Array<{ title: string; body: string; proof: string; icon: IconKey }>;
+
+export const missingLayer = [
+  {
+    title: "Maritime operations",
+    body: "Vessel timing, berth context, boarding windows and disruption state.",
+    icon: "ship",
+  },
+  {
+    title: "Terminal activity",
+    body: "Zone, queue, baggage, check-in and staff-ready information.",
+    icon: "users",
+  },
+  {
+    title: "Passenger flow",
+    body: "Where passenger groups are, what they need next and which route is safest.",
+    icon: "route",
+  },
+  {
+    title: "Intermodal transport",
+    body: "Airport, rail, coach, taxi and city access signals that affect the journey.",
+    icon: "network",
+  },
+] satisfies Array<{ title: string; body: string; icon: IconKey }>;
+
+export const signageFit = [
+  {
+    title: "The signage contractor",
+    body: "Delivers screens, cabling, mounting, installation and local support.",
+  },
+  {
+    title: "The CMS",
+    body: "Publishes approved content and controls the screen estate.",
+  },
+  {
+    title: "SmartSEA",
+    body: "Connects data sources, defines journey logic and feeds passenger-ready instructions into any capable CMS.",
+  },
+];
+
+export const practicalPath = [
+  {
+    title: "Identify priority situations",
+    body: "Find where passengers experience the most uncertainty and staff carry the highest communication burden.",
+  },
+  {
+    title: "Map available data",
+    body: "Confirm what exists today, what can be connected and which external sources add value.",
+  },
+  {
+    title: "Define first use cases",
+    body: "Select a small number of high-impact passenger information services with immediate operational value.",
+  },
+  {
+    title: "Connect to the signage environment",
+    body: "Feed the CMS through controlled APIs and enable real-time, context-aware messaging.",
+  },
+  {
+    title: "Expand progressively",
+    body: "Extend to additional journeys, channels and services toward a connected passenger platform.",
+  },
+];
+
 export const heroStats = [
   { value: "11", label: "curated intermodal itineraries" },
   { value: "3", label: "broken MCT connections" },
@@ -103,23 +212,23 @@ export const heroStats = [
 
 export const apiPillars = [
   {
-    title: "The product is the API layer",
-    body: "SmartSEA Intermodal APIs turn port, rail, airport, vessel, event, and disruption updates into decisions PPA can act on.",
+    title: "Control",
+    body: "SmartSEA Intermodal APIs define the passenger information layer that PPA can govern across terminal zones, channels and priority states.",
     icon: "api",
   },
   {
     title: "CMS and screens are channels",
-    body: "The same decision can feed terminal screens, staff tools, mobile, web, audio, and future channels without changing the story.",
+    body: "The CMS publishes the message. The SmartSEA data and journey layer defines which message is right for the situation.",
     icon: "monitor",
   },
   {
-    title: "Connection risk becomes visible",
-    body: "PPA sees which passenger groups are close to missing a transfer before confusion reaches the terminal floor.",
+    title: "React",
+    body: "Connection risk, delays, congestion and operational changes become live instructions instead of static directional content.",
     icon: "radar",
   },
   {
-    title: "Recovery action is generated",
-    body: "When the journey breaks, operators get the next action and passengers see a clear instruction on the nearest channel.",
+    title: "Extend",
+    body: "The same passenger information layer can grow from terminal signage into staff tools, mobile handoffs and intermodal journey services.",
     icon: "shield",
   },
 ] satisfies Array<{ title: string; body: string; icon: IconKey }>;
