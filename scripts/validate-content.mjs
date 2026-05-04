@@ -63,6 +63,16 @@ const requiredPillars = [
   "format: \"baggage\"",
   "format: \"staff\"",
   "format: \"mobile\"",
+  "Journey Risk and Connection Confidence",
+  "Next Best Action",
+  "Passenger Group Orchestration",
+  "Disruption and Recovery Management",
+  "Terminal Flow and Boarding Control",
+  "Cruise, Berth and Passenger Impact",
+  "Zone Based Publishing and Operational Triggers",
+  "Beyond Terminal Journey Guidance",
+  "SmartSEA Journey Intelligence",
+  "screen-detail-panel",
 ];
 
 for (const pillar of requiredPillars) {

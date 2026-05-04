@@ -183,6 +183,7 @@ img {
 .display-meta,
 .display-message span,
 .format-panel span,
+.screen-detail-panel span,
 .display-instruction span,
 .display-strip,
 .stage-display-topline span,
@@ -697,6 +698,7 @@ img {
 .display-header,
 .display-main,
 .format-panel,
+.screen-detail-panel,
 .display-instruction,
 .display-strip {
   position: relative;
@@ -844,6 +846,40 @@ img {
   font-size: 1rem;
   line-height: 1.18;
   margin-top: 8px;
+  overflow-wrap: anywhere;
+}
+
+.screen-detail-panel {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.screen-detail-panel.dense {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.screen-detail-panel article {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-small);
+  min-width: 0;
+  padding: 12px;
+}
+
+.screen-detail-panel span {
+  color: rgba(255, 255, 255, 0.58);
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 800;
+}
+
+.screen-detail-panel strong {
+  color: #ffffff;
+  display: block;
+  font-size: 0.98rem;
+  line-height: 1.18;
+  margin-top: 7px;
   overflow-wrap: anywhere;
 }
 
@@ -1038,17 +1074,35 @@ img {
   grid-template-columns: 1fr;
 }
 
+.passenger-display.compact .screen-detail-panel,
+.passenger-display.compact .screen-detail-panel.dense {
+  gap: 8px;
+  grid-template-columns: 1fr;
+}
+
 .passenger-display.compact .format-panel div {
   min-height: auto;
   padding: 10px;
+}
+
+.passenger-display.compact .screen-detail-panel article {
+  padding: 9px;
 }
 
 .passenger-display.compact .format-panel span {
   font-size: 0.62rem;
 }
 
+.passenger-display.compact .screen-detail-panel span {
+  font-size: 0.6rem;
+}
+
 .passenger-display.compact .format-panel strong {
   font-size: 0.86rem;
+}
+
+.passenger-display.compact .screen-detail-panel strong {
+  font-size: 0.82rem;
 }
 
 .passenger-display.compact .format-panel svg {
@@ -1125,6 +1179,11 @@ img {
 
 .demo-hero-copy h1 {
   max-width: 880px;
+}
+
+.demo-hero-copy,
+.scenario-summary {
+  min-width: 0;
 }
 
 .usp-strip {
@@ -1225,7 +1284,7 @@ img {
   border-radius: var(--radius-small);
   display: grid;
   gap: 6px;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   padding: 8px;
   position: static;
 }
@@ -1891,6 +1950,8 @@ img {
   .proposal-copy h2,
   .demo-hero h1 {
     font-size: 2.25rem;
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .cover-panel p {
@@ -1958,6 +2019,8 @@ img {
 
   .display-header,
   .display-main,
+  .screen-detail-panel,
+  .screen-detail-panel.dense,
   .display-instruction,
   .passenger-display.compact .display-main {
     grid-template-columns: 1fr;
@@ -1988,6 +2051,16 @@ img {
   .passenger-display.compact .display-message h3 {
     font-size: 1.9rem;
     line-height: 1.02;
+    overflow-wrap: anywhere;
+  }
+
+  .scenario-summary h2,
+  .stage-status h2,
+  .instruction-panel h2,
+  .panel-heading h2,
+  .screen-wall-heading h2 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .display-message p {
@@ -2028,6 +2101,33 @@ img {
 
   .closing-band h2 {
     font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header > *,
+  .demo-hero > *,
+  .usp-strip > *,
+  .demo-workbench > *,
+  .practical-demo-grid > *,
+  .outcome-strip > *,
+  .practical-screens-grid > *,
+  .signal-grid > *,
+  .snapshot-grid > * {
+    max-width: 350px;
+    width: min(100%, calc(100vw - 40px));
+  }
+
+  .site-nav a {
+    font-size: 0.84rem;
+    min-width: 0;
+    padding: 0 8px;
+  }
+
+  .cover-panel h1,
+  .proposal-copy h2,
+  .demo-hero h1 {
+    font-size: 2rem;
   }
 }
 

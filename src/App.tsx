@@ -502,7 +502,11 @@ function PassengerDisplayMockup({
             </div>
           </section>
 
-          <ScreenFormatPanel screen={screen} />
+          {screen.details?.length ? (
+            <ScreenDetailPanel screen={screen} />
+          ) : (
+            <ScreenFormatPanel screen={screen} />
+          )}
 
           <section className="display-instruction">
             <div>
@@ -522,6 +526,24 @@ function PassengerDisplayMockup({
         </div>
       </div>
     </article>
+  );
+}
+
+function ScreenDetailPanel({ screen }: { screen: PassengerScreenMessage }) {
+  const densityClass = screen.details && screen.details.length > 5 ? "dense" : "";
+
+  return (
+    <section
+      className={`screen-detail-panel ${densityClass}`}
+      aria-label="Structured screen content"
+    >
+      {screen.details?.map((detail) => (
+        <article key={`${screen.zone}-${detail.label}`}>
+          <span>{detail.label}</span>
+          <strong>{detail.value}</strong>
+        </article>
+      ))}
+    </section>
   );
 }
 

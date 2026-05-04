@@ -102,3 +102,16 @@ Success proxy:
 
 Evidence:
 - `npm run validate`, `npm run build`, and desktop/mobile browser checks should pass after the screen-format update.
+
+## 2026-05-04
+
+Hypothesis: a capability-table update can regress into generic prose unless each capability is represented by a protected structured screen.
+
+Improvement: added a capability screen scenario and validator anchors for all eight SmartSEA capability names plus the structured screen detail renderer.
+
+Success proxy:
+- the demo contains passenger-ready screens for journey risk, next best action, group orchestration, disruption recovery, terminal flow, berth impact, zone triggers, and beyond-terminal guidance,
+- `npm run validate` fails if those capability anchors or the structured screen renderer disappear.
+
+Evidence:
+- `npm run validate` and `npm run build` should pass after generating the capability screens.

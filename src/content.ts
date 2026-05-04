@@ -89,6 +89,10 @@ export type PassengerScreenMessage = {
   time: string;
   icon: IconKey;
   format?: ScreenFormat;
+  details?: Array<{
+    label: string;
+    value: string;
+  }>;
 };
 
 export type ReferenceCase = {
@@ -374,6 +378,263 @@ export const apiProofGroups: ApiProofGroup[] = [
 ];
 
 export const apiStories: ApiStory[] = [
+  {
+    id: "smartsea-capability-screens",
+    label: "Capability screens",
+    status: "8 live capabilities",
+    severity: "normal",
+    headline: "Eight SmartSEA capabilities become passenger-ready screen instructions.",
+    operatorNote:
+      "SmartSEA converts journey risk, group orchestration, disruption recovery, terminal flow and zone triggers into structured PPA screen messages that any capable CMS can publish.",
+    instruction: {
+      title: "Publish the SmartSEA capability screen set",
+      body: "Each screen carries a clear passenger or operator action while preserving the decision context behind it: risk, affected group, owner, timing and publishing zone.",
+      action: "Activate capability screen set",
+    },
+    outcomes: [
+      {
+        label: "Passenger result",
+        value: "Every screen answers what to do next",
+        body: "Passengers see a concrete action, group rule, timing window or return instruction instead of generic port information.",
+      },
+      {
+        label: "Operator result",
+        value: "PPA controls movement by group and zone",
+        body: "Operations can hold, release, split and recover passenger groups using the same live decision context.",
+      },
+      {
+        label: "Channel result",
+        value: "CMS publishes structured decisions",
+        body: "Screens remain the channel while SmartSEA supplies the journey logic, trigger state and message priority.",
+      },
+    ],
+    screens: [
+      {
+        zone: "Terminal A connection display",
+        context: "Journey Risk and Connection Confidence",
+        title: "Connection Confidence: Medium",
+        instruction:
+          "Leave terminal by 10:20. Road congestion is medium, baggage is on time and the airport transfer is currently 62 minutes.",
+        action: "Leave terminal by 10:20",
+        status: "Buffer 38 min",
+        time: "Updated 10:05",
+        icon: "plane",
+        format: "advisory",
+        details: [
+          { label: "Connection confidence", value: "Medium" },
+          { label: "Recommended action", value: "Leave terminal by 10:20" },
+          {
+            label: "Reason",
+            value: "Road congestion medium, baggage on time, airport transfer 62 min",
+          },
+          { label: "Safe transfer window", value: "10:15 to 10:35" },
+          { label: "Buffer", value: "38 min" },
+        ],
+      },
+      {
+        zone: "Coach transfer display",
+        context: "Next Best Action",
+        title: "Proceed to Coach Zone B",
+        instruction:
+          "Passengers with flights before 13:30 should move to Coach Zone B. Departure is confirmed and the airport transfer remains feasible.",
+        action: "Proceed to Coach Zone B",
+        status: "Coach confirmed",
+        time: "Updated 10:30",
+        icon: "bus",
+        format: "transfer",
+        details: [
+          { label: "Recommended action", value: "Proceed to Coach Zone B" },
+          { label: "Affected group", value: "Passengers with flights before 13:30" },
+          {
+            label: "Reason",
+            value: "Coach departure confirmed, baggage ready, airport transfer still feasible",
+          },
+          { label: "Next update", value: "10:45" },
+        ],
+      },
+      {
+        zone: "Boarding hall group display",
+        context: "Passenger Group Orchestration",
+        title: "Boarding groups now sequenced",
+        instruction:
+          "Priority passengers are boarding now. Decks 10 to 12 use lane 2; decks 7 to 9 remain seated; decks 4 to 6 start in 20 minutes.",
+        action: "Follow your group call",
+        status: "Sequenced boarding",
+        time: "Updated 10:35",
+        icon: "users",
+        format: "terminal",
+        details: [
+          { label: "Priority passengers", value: "Boarding now" },
+          { label: "Decks 10 to 12", value: "Proceed to boarding lane 2" },
+          { label: "Decks 7 to 9", value: "Please remain seated" },
+          { label: "Decks 4 to 6", value: "Starts in 20 min" },
+          { label: "Airport transfer group", value: "Prepare for coach departure" },
+          { label: "Assisted passengers", value: "Go to PPA help point" },
+        ],
+      },
+      {
+        zone: "Terminal lounge recovery screen",
+        context: "Disruption and Recovery Management",
+        title: "Boarding delayed 25 min",
+        instruction:
+          "Decks 7 to 12 and the airport transfer group should wait in the terminal lounge. PPA help point is the recovery point.",
+        action: "Wait in terminal lounge",
+        status: "New boarding 14:50",
+        time: "Updated 14:25",
+        icon: "alert",
+        format: "handoff",
+        details: [
+          { label: "Alert", value: "Boarding delayed 25 min" },
+          { label: "Affected group", value: "Decks 7 to 12 and airport transfer group" },
+          { label: "Recommended action", value: "Wait in terminal lounge" },
+          { label: "Recovery point", value: "PPA help point" },
+          { label: "New expected boarding", value: "14:50" },
+        ],
+      },
+      {
+        zone: "Hall B boarding control",
+        context: "Terminal Flow and Boarding Control",
+        title: "Use Hall B and lane 2",
+        instruction:
+          "Hall B has the best flow. Check-in wait is 7 minutes, security wait is 11 minutes and baggage is ready.",
+        action: "Enter only when called",
+        status: "Gate congestion moderate",
+        time: "Updated 13:55",
+        icon: "route",
+        format: "terminal",
+        details: [
+          { label: "Recommended hall", value: "Hall B" },
+          { label: "Check in wait", value: "7 min" },
+          { label: "Security wait", value: "11 min" },
+          { label: "Baggage", value: "Ready" },
+          { label: "Gate congestion", value: "Moderate" },
+          { label: "Boarding lane", value: "Lane 2" },
+          { label: "Rule", value: "Enter only when your group is called" },
+        ],
+      },
+      {
+        zone: "PPA operations impact board",
+        context: "Cruise, Berth and Passenger Impact",
+        title: "MSC Seascape: transfers at risk",
+        instruction:
+          "Berth B6 boarding is delayed 25 minutes. Hold the airport group and update the transfer plan before release.",
+        action: "Hold airport group",
+        status: "Boarding delayed 25 min",
+        time: "Updated 14:20",
+        icon: "ship",
+        format: "staff",
+        details: [
+          { label: "Vessel", value: "MSC Seascape" },
+          { label: "Berth", value: "B6" },
+          { label: "Boarding status", value: "Delayed 25 min" },
+          { label: "Passenger impact", value: "Airport transfers at risk" },
+          { label: "Required action", value: "Hold airport group and update transfer plan" },
+        ],
+      },
+      {
+        zone: "Terminal A and coach exit",
+        context: "Zone Based Publishing and Operational Triggers",
+        title: "Road congestion high",
+        instruction:
+          "SmartSEA Journey Intelligence triggers a high-priority message for Terminal A and the coach exit: leave terminal earlier.",
+        action: "Publish earlier departure",
+        status: "High priority",
+        time: "Updated 12:05",
+        icon: "network",
+        format: "advisory",
+        details: [
+          { label: "Trigger", value: "Road congestion high" },
+          { label: "Message", value: "Leave terminal earlier" },
+          { label: "Affected zone", value: "Terminal A and coach exit" },
+          { label: "Priority", value: "High" },
+          { label: "Owner", value: "PPA Operations" },
+          { label: "Logic source", value: "SmartSEA Journey Intelligence" },
+        ],
+      },
+      {
+        zone: "City time guidance display",
+        context: "Beyond Terminal Journey Guidance",
+        title: "Available city time: 3 h 10 min",
+        instruction:
+          "Return to the terminal by 14:45 for boarding at 15:30. Live transport timing is included in the recommendation.",
+        action: "Return by 14:45",
+        status: "Live transport included",
+        time: "Updated 11:35",
+        icon: "map",
+        format: "mobile",
+        details: [
+          { label: "Available city time", value: "3 h 10 min" },
+          { label: "Return to terminal by", value: "14:45" },
+          { label: "Boarding starts", value: "15:30" },
+          { label: "Live transport included", value: "Yes" },
+          { label: "Options", value: "SNF 20 min, Piraeus Marina 12 min, Acropolis 35 min" },
+        ],
+      },
+    ],
+    snapshot: {
+      itinerary: "PPA capability screen set",
+      risk: "Live journey logic",
+      recovery: "8 capabilities",
+      confidence: "Operational",
+    },
+    signals: [
+      {
+        label: "Journey intelligence",
+        endpoint: "/connection-risk + /intermodal/itineraries",
+        value: "Confidence and buffers",
+        body: "Connection confidence, safe transfer windows and city-time guidance use the same journey model.",
+      },
+      {
+        label: "Terminal flow",
+        endpoint: "/terminal/queues + /boarding/groups",
+        value: "Hall, lane and group rules",
+        body: "Wait times, baggage readiness and group sequencing become practical screen instructions.",
+      },
+      {
+        label: "Recovery intelligence",
+        endpoint: "/maritime/GRPIR + /ai/recovery-copilot",
+        value: "Delay owner and action",
+        body: "Vessel, berth and boarding changes are translated into hold, release and recovery actions.",
+      },
+      {
+        label: "Zone publishing",
+        endpoint: "/cms/publishing-rules",
+        value: "Trigger, zone and priority",
+        body: "Road congestion and operational triggers decide which zones receive which message first.",
+      },
+    ],
+    steps: [
+      {
+        mode: "Detect",
+        time: "10:05",
+        title: "Journey risk and terminal state calculated",
+        detail: "SmartSEA evaluates transfer windows, baggage state, congestion and live transport.",
+        state: "Medium",
+      },
+      {
+        mode: "Decide",
+        time: "10:30",
+        title: "Next action selected by passenger group",
+        detail: "Airport, deck, assisted and city-time groups receive different instructions.",
+        state: "Segmented",
+      },
+      {
+        mode: "Publish",
+        time: "10:35",
+        title: "CMS receives structured screen messages",
+        detail: "PPA screens publish the SmartSEA decision by zone, group and priority.",
+        state: "Live",
+      },
+      {
+        mode: "Recover",
+        time: "14:25",
+        title: "Disruption changes passenger guidance",
+        detail: "Delay, berth impact and airport-transfer risk update screens and operator action.",
+        state: "Updated",
+      },
+    ],
+    icon: "monitor",
+  },
   {
     id: "cruise-rail-air",
     label: "Cruise to airport",
